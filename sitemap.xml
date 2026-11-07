@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url>
     <loc>https://esp32.viennv.dev/</loc>
+    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://esp32.viennv.dev/assets/og-image.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://esp32.viennv.dev/assets/loa-ting.jpg</image:loc>
+    </image:image>
+    <video:video>
+      <video:thumbnail_loc>https://esp32.viennv.dev/assets/review-poster.jpg</video:thumbnail_loc>
+      <video:title>Loa Ting: review loa thông minh để bàn, vỏ in 3D</video:title>
+      <video:description>Một vòng quanh vỏ in 3D, nhìn xuyên vào bên trong, rồi đi qua từng ứng dụng của loa: trợ lý AI, nhạc, đài VOV, khung ảnh, Waze HUD, báo thức, báo số dư.</video:description>
+      <video:content_loc>https://esp32.viennv.dev/assets/review.mp4</video:content_loc>
+      <video:duration>290</video:duration>
+      <video:publication_date>2026-11-07T15:11:00+07:00</video:publication_date>
+    </video:video>
   </url>
 </urlset>

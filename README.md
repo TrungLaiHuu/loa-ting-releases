@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/loa-ting.jpg" alt="Loa Ting: loa thông minh để bàn, mặt trước vàng, lưng xanh than" width="420" />
+<img src="assets/og-image.jpg" alt="Loa Ting: loa thông minh để bàn, mặt trước vàng, lưng xanh than" width="720" />
 
 # Loa Ting
 
@@ -9,7 +9,7 @@
 **Trợ lý AI tiếng Việt · Nhạc · Đài VOV · Khung ảnh · Waze HUD · Báo thức · Lịch âm · Báo biến động số dư**
 
 [![Website](https://img.shields.io/badge/🌐_esp32.viennv.dev-1E2A44?style=for-the-badge)](https://esp32.viennv.dev)
-[![Tải về](https://img.shields.io/badge/⬇️_Tải_về-Releases-F5C518?style=for-the-badge)](https://github.com/small-project-mmo/loa-ting-releases/releases)
+![Tải về](https://img.shields.io/badge/⬇️_Tải_về-Coming_soon-F5C518?style=for-the-badge)
 [![viennv.dev](https://img.shields.io/badge/viennv.dev-1e293b?style=for-the-badge)](https://viennv.dev)
 
 </div>
@@ -55,7 +55,7 @@ Video review gần 5 phút: vỏ in 3D, rồi từng ứng dụng trên loa. Xem
 
 ## 📥 Tải về
 
-Bản phát hành đầu tiên sẽ có ở trang **[Releases](https://github.com/small-project-mmo/loa-ting-releases/releases)**: firmware kèm công cụ nạp, và file in vỏ (3MF, STL, bản vẽ).
+**Coming soon.** Chưa có bản phát hành nào. Bản đầu tiên sẽ có ở trang Releases của repo này: firmware kèm công cụ nạp, và file in vỏ (3MF, STL, bản vẽ).
 
 ## 🛠️ Tự làm một chiếc
 
