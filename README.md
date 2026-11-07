@@ -53,6 +53,8 @@ Video review gần 5 phút: vỏ in 3D, rồi từng ứng dụng trên loa. Xem
 - **Vỏ để bàn:** 104 × 52 × 92 mm, mặt trước ngả 20°; pin 18650 dưới đáy, công tắc nguồn; mặt trước cài 4 nẫy móc, không cần vít; 9 khe thoát nhiệt sau lưng.
 - **In 3D:** 5 chi tiết, khoảng 97 g nhựa, lưng xanh than hoặc đen, mặt trước vàng. File 3MF xếp sẵn bàn in 220 × 220.
 
+🧊 **[Xoay thử mô hình 3D](https://esp32.viennv.dev/3d/)** ngay trên trình duyệt: tách lớp, cắt dọc, giấu từng chi tiết.
+
 ## 📥 Tải về
 
 **Coming soon.** Chưa có bản phát hành nào. Bản đầu tiên sẽ có ở trang Releases của repo này: firmware kèm công cụ nạp, và file in vỏ (3MF, STL, bản vẽ).

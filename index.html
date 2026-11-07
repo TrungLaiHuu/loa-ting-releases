@@ -130,6 +130,23 @@
   .btn-yellow { background: var(--yellow); color: var(--ink); }
   .btn-yellow:hover { background: var(--yellow-hi); }
   .btn-soon, .btn-soon:hover { background: var(--yellow); opacity: .55; cursor: default; }
+  /* mô hình 3D (mục Vỏ in 3D): ảnh xem trước, bấm thì nạp 3d/ vào khung; điện thoại mở trang riêng */
+  .model3d { margin-top: 28px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  .model3d-head { display: flex; align-items: center; justify-content: space-between; gap: 12px 20px; padding: 20px 24px; }
+  .model3d-head h3 { margin: 0; font-size: 20px; letter-spacing: -.01em; }
+  .model3d-head p { margin: 4px 0 0; color: var(--muted); font-size: 15px; }
+  .model3d-head .btn { flex: none; }
+  .model3d-stage { position: relative; aspect-ratio: 16 / 9; background: #e8e6e1; border-top: 1px solid var(--line); }
+  .model3d-stage img, .model3d-stage iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+  .model3d-stage img { object-fit: cover; object-position: left center; transition: filter .2s; }
+  .model3d-load { position: absolute; inset: 0; display: block; }
+  .model3d-load:hover img { filter: brightness(.94); }
+  .model3d-cta { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); box-shadow: 0 10px 30px rgba(14,17,22,.28); }
+  .model3d-cta svg { width: 20px; height: 20px; }
+  @media (max-width: 760px) {
+    .model3d-head { flex-direction: column; align-items: flex-start; padding: 18px; }
+    .model3d-stage { aspect-ratio: 4 / 3; }
+  }
   .btn-line { border: 1.5px solid rgba(28,30,34,.28); color: var(--ink); background: transparent; }
   .btn-line:hover { background: rgba(255,255,255,.55); }
   .btn svg { width: 18px; height: 18px; flex: none; }
@@ -477,6 +494,24 @@
         </div>
       </article>
     </div>
+    <div class="model3d" id="mo-hinh-3d">
+      <div class="model3d-head">
+        <div>
+          <h3>Xoay thử mô hình 3D</h3>
+          <p>Đúng mô hình dùng để in: xoay, tách lớp, cắt dọc, giấu từng chi tiết để nhìn vào bên trong.</p>
+        </div>
+        <a class="btn btn-line" href="3d/" target="_blank" rel="noopener">Mở toàn màn hình</a>
+      </div>
+      <div class="model3d-stage">
+        <a class="model3d-load" href="3d/" aria-label="Mở mô hình 3D của vỏ loa">
+          <img src="assets/mo-hinh-3d.jpg" width="1120" height="630" loading="lazy" alt="Trang xem 3D: vỏ loa lưng xanh than, mặt trước vàng, bên phải là các nút góc nhìn, tách lớp, cắt dọc và danh sách chi tiết">
+          <span class="btn btn-dark model3d-cta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8 20 7.4v9.2l-8 4.6-8-4.6V7.4z"/><path d="M4 7.4l8 4.6 8-4.6M12 12v9.2"/></svg>
+            Xoay mô hình 3D
+          </span>
+        </a>
+      </div>
+    </div>
     <div class="details">
       <div class="detail">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4v6a5 5 0 0 0 10 0V4"/><path d="M4 20h16"/></svg>
@@ -762,6 +797,16 @@
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
       if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+    });
+    // 3D model: on wide screens load 3d/ into the frame on click; phones open the page (dragging the
+    // model inside the page would trap scrolling)
+    var m3d = document.querySelector('.model3d-load');
+    if (m3d) m3d.addEventListener('click', function (e) {
+      if (window.matchMedia('(max-width: 760px)').matches) return;
+      e.preventDefault();
+      var f = document.createElement('iframe');
+      f.src = '3d/'; f.title = 'Mô hình 3D của vỏ loa'; f.allow = 'fullscreen';
+      m3d.replaceWith(f);
     });
     // chapter buttons jump the review video to their moment
     var v = document.getElementById('review');

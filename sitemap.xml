@@ -22,4 +22,10 @@
       <video:publication_date>2026-11-07T15:11:00+07:00</video:publication_date>
     </video:video>
   </url>
+  <url>
+    <loc>https://esp32.viennv.dev/3d/</loc>
+    <lastmod>2026-11-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>
