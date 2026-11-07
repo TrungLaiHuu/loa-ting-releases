@@ -93,7 +93,7 @@
     --wrap: 1120px;
   }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  html { scroll-behavior: smooth; scroll-padding-top: 64px; -webkit-text-size-adjust: 100%; }  /* 64px: header dính ở đầu */
   body {
     margin: 0; background: var(--paper); color: var(--ink);
     font: 400 17px/1.6 "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -344,9 +344,9 @@
   }
 </style>
 </head>
-<body>
+<body id="top">
 
-<header class="top" id="top">
+<header class="top">
   <div class="wrap nav">
     <a class="brand" href="#top" aria-label="Loa Ting">
       <svg viewBox="0 0 32 32" aria-hidden="true">
@@ -754,9 +754,15 @@
 <script>
   (function () {
     var y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear();
-    var h = document.getElementById('top');
+    var h = document.querySelector('header.top');
     var on = function () { h.classList.toggle('scrolled', window.scrollY > 8); };
     on(); window.addEventListener('scroll', on, { passive: true });
+    // logo: back to the top, and drop the #hash so a reload stays at the top
+    document.querySelector('.brand').addEventListener('click', function (e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+    });
     // chapter buttons jump the review video to their moment
     var v = document.getElementById('review');
     document.querySelectorAll('.chapters button').forEach(function (b) {
