@@ -16,11 +16,11 @@
 <meta property="og:url" content="https://esp32.viennv.dev/">
 <meta property="og:title" content="Loa Ting · Nhỏ gọn, làm được nhiều việc">
 <meta property="og:description" content="Trợ lý AI nói tiếng Việt, nhạc theo yêu cầu, đài VOV, khung ảnh Google Photos, giá vàng, báo thức, lịch âm và báo biến động số dư, trên một chiếc loa nhỏ có vỏ in 3D. Thay vỏ là thành HUD dẫn đường trên ô tô.">
-<meta property="og:image" content="https://esp32.viennv.dev/assets/og-image.jpg?v=1">
+<meta property="og:image" content="https://esp32.viennv.dev/assets/og-image.jpg?v=2">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Loa Ting: loa thông minh để bàn, mặt trước vàng, lưng xanh than, màn hình đồng hồ và thời tiết">
+<meta property="og:image:alt" content="Loa Ting: ba kiểu vỏ in 3D, vỏ để bàn mặt trước vàng lưng xanh than và hai vỏ HUD ô tô màu đen hiện Waze HUD">
 <meta property="og:video" content="https://esp32.viennv.dev/assets/review.mp4">
 <meta property="og:video:type" content="video/mp4">
 <meta property="og:video:width" content="1280">
@@ -28,8 +28,8 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Loa Ting · Nhỏ gọn, làm được nhiều việc">
 <meta name="twitter:description" content="Trợ lý AI nói tiếng Việt, nhạc theo yêu cầu, đài VOV, khung ảnh Google Photos, giá vàng, báo thức, lịch âm và báo biến động số dư, trên một chiếc loa nhỏ có vỏ in 3D. Thay vỏ là thành HUD dẫn đường trên ô tô.">
-<meta name="twitter:image" content="https://esp32.viennv.dev/assets/og-image.jpg?v=1">
-<meta name="twitter:image:alt" content="Loa Ting: loa thông minh để bàn, mặt trước vàng, lưng xanh than, màn hình đồng hồ và thời tiết">
+<meta name="twitter:image" content="https://esp32.viennv.dev/assets/og-image.jpg?v=2">
+<meta name="twitter:image:alt" content="Loa Ting: ba kiểu vỏ in 3D, vỏ để bàn mặt trước vàng lưng xanh than và hai vỏ HUD ô tô màu đen hiện Waze HUD">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <script type="application/ld+json">
@@ -40,7 +40,7 @@
   "url": "https://esp32.viennv.dev/",
   "inLanguage": "vi",
   "description": "Loa thông minh để bàn, màn hình cảm ứng 2,8″: trợ lý AI tiếng Việt, nhạc, đài VOV, khung ảnh, giá vàng, báo thức, báo số dư. Vỏ in 3D, có vỏ HUD cho ô tô.",
-  "image": "https://esp32.viennv.dev/assets/og-image.jpg?v=1",
+  "image": "https://esp32.viennv.dev/assets/og-image.jpg?v=2",
   "publisher": {
     "@type": "Organization",
     "name": "viennv.dev",
@@ -57,7 +57,7 @@
   "description": "Một vòng quanh vỏ in 3D, nhìn xuyên vào bên trong, rồi đi qua từng ứng dụng của loa: trợ lý AI “Hey Ivy”, nhạc, đài VOV, khung ảnh, Waze HUD, báo thức, báo số dư.",
   "thumbnailUrl": [
     "https://esp32.viennv.dev/assets/review-poster.jpg",
-    "https://esp32.viennv.dev/assets/og-image.jpg?v=1"
+    "https://esp32.viennv.dev/assets/og-image.jpg?v=2"
   ],
   "uploadDate": "2026-11-07T15:11:00+07:00",
   "duration": "PT4M50S",
@@ -148,11 +148,22 @@
   .nav-links a { text-decoration: none; color: var(--muted); }
   .nav-links a:hover { color: var(--ink); }
   .nav .btn { height: 40px; padding: 0 16px; font-size: 14px; border-radius: 11px; }
+  /* menu điện thoại: nút ☰ mở danh sách mục ngay dưới header */
+  .menu-btn { display: none; width: 44px; height: 44px; margin-right: -10px; border: 0; border-radius: 12px; background: transparent; color: var(--ink); cursor: pointer; place-items: center; }
+  .menu-btn:hover { background: rgba(255,255,255,.55); }
+  .menu-btn svg { width: 24px; height: 24px; }
+  .menu-btn path { transition: transform .2s, opacity .2s; transform-origin: 12px 12px; }
+  header.top.open .menu-btn .m1 { transform: translateY(5px) rotate(45deg); }
+  header.top.open .menu-btn .m2 { opacity: 0; }
+  header.top.open .menu-btn .m3 { transform: translateY(-5px) rotate(-45deg); }
+  .nav-links .nav-cta { display: none; }
+
 
   /* hero */
   .hero { padding: clamp(28px, 5vw, 56px) 0 clamp(40px, 6vw, 72px); }
   .hero-grid { display: grid; grid-template-columns: 1.02fr 1fr; gap: clamp(24px, 4vw, 56px); align-items: center; }
-  .hero h1 { font-size: clamp(42px, 6.2vw, 74px); font-weight: 800; letter-spacing: -.035em; margin: 22px 0 20px; }
+  /* trên máy tính đúng 2 dòng: "Nhỏ gọn, làm được" vừa bề ngang cột chữ (≈ 8,7 × cỡ chữ), "nhiều việc." không ngắt */
+  .hero h1 { font-size: clamp(40px, 4.6vw, 58px); font-weight: 800; letter-spacing: -.035em; margin: 22px 0 20px; }
   .hero h1 .hl { position: relative; white-space: nowrap; }
   .hero h1 .hl::after {
     content: ""; position: absolute; left: -2px; right: -4px; bottom: .06em; height: .34em;
@@ -355,10 +366,22 @@
   .dark :focus-visible { outline-color: var(--yellow); }
 
   @media (max-width: 980px) {
-    .nav-links { display: none; }
+    .nav { justify-content: flex-start; }
+    .brand { margin-right: auto; }
+    .menu-btn { display: grid; }
+    .nav-links {
+      display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 0;
+      padding: 4px 20px 18px; background: var(--paper); border-bottom: 1px solid var(--line);
+      box-shadow: 0 18px 30px rgba(28,30,34,.12);
+    }
+    header.top.open .nav-links { display: flex; }
+    .nav-links a { padding: 13px 2px; font-size: 17px; font-weight: 600; color: var(--ink); border-bottom: 1px solid var(--line); box-shadow: none; }
+    .nav-links a[aria-current="page"] { color: var(--navy); box-shadow: inset 3px 0 0 var(--yellow); padding-left: 12px; }
     .features { grid-template-columns: repeat(2, 1fr); }
     .details { grid-template-columns: repeat(2, 1fr); }
   }
+  /* cột ảnh hero hẹp: bong bóng sẽ che vỏ HUD phẳng */
+  @media (min-width: 861px) and (max-width: 1060px) { .toast { display: none; } }
   @media (max-width: 860px) {
     .hero-grid, .demo-grid, .assistant, .hw-grid, .hud-intro, .vo-grid { grid-template-columns: 1fr; }
     .vo-grid { max-width: 560px; }
@@ -368,8 +391,23 @@
   }
   @media (max-width: 560px) {
     body { font-size: 16px; }
-    .features, .details { grid-template-columns: 1fr; }
+    .details { grid-template-columns: 1fr; }
     .hero-cta .btn { flex: 1 1 100%; justify-content: center; }
+    .nav-links .nav-cta { display: block; margin-top: 12px; padding: 13px 16px; border: 0; border-radius: 13px; background: var(--navy); color: #fff; text-align: center; }
+    /* 16 tính năng: 2 cột cho trang bớt dài */
+    .features { grid-template-columns: 1fr 1fr; gap: 20px 12px; }
+    .feature .screen { padding: 4px; border-radius: 11px; margin-bottom: 10px; }
+    .feature .screen img { border-radius: 7px; }
+    .feature h3 { font-size: 15px; gap: 4px 6px; }
+    .feature p { font-size: 13.5px; line-height: 1.5; margin-top: 4px; }
+    .badge { font-size: 12px; padding: 2px 7px; }
+    /* hàng vuốt ngang: thẻ sau ló ra một phần để biết còn nữa */
+    .vo-grid, .flow { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px; margin-left: -20px; margin-right: -20px; padding: 2px 20px 12px; scroll-padding-left: 20px; max-width: none; scrollbar-width: none; }
+    .vo-grid > .vo-card, .flow > .step { flex: 0 0 82%; scroll-snap-align: start; }
+    .vo-grid::-webkit-scrollbar, .flow::-webkit-scrollbar { display: none; }
+    .build-step { padding: 20px; }
+    .chapters button { padding: 10px; font-size: 15px; }
+    .foot-links a { display: inline-block; padding: 8px 0; }
     .toast { display: none; }
     .hud-tag { bottom: -4%; padding: 6px 10px 6px 6px; gap: 8px; }
     .hud-tag .ico { width: 28px; height: 28px; }
@@ -399,15 +437,17 @@
       </svg>
       Loa Ting
     </a>
-    <nav class="nav-links" aria-label="Mục lục">
+    <nav class="nav-links" id="nav-links" aria-label="Mục lục">
       <a href="#video">Video</a>
       <a href="vo/">Vỏ in 3D</a>
       <a href="#hud">HUD ô tô</a>
       <a href="#tinh-nang">Tính năng</a>
       <a href="#bao-so-du">Báo số dư</a>
       <a href="#hoi-dap">Hỏi đáp</a>
+      <a class="nav-cta" href="#tu-lam">Tự làm một chiếc</a>
     </nav>
     <a class="btn btn-dark" href="#tu-lam">Tự làm một chiếc</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Mở menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path class="m1" d="M4 7h16"/><path class="m2" d="M4 12h16"/><path class="m3" d="M4 17h16"/></svg></button>
   </div>
 </header>
 
@@ -835,6 +875,14 @@
   (function () {
     var y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear();
     var h = document.querySelector('header.top');
+    // menu điện thoại
+    var mb = document.querySelector('.menu-btn'), hd = document.querySelector('header.top');
+    function menu(open) { hd.classList.toggle('open', open); mb.setAttribute('aria-expanded', String(open)); mb.setAttribute('aria-label', open ? 'Đóng menu' : 'Mở menu'); }
+    mb.addEventListener('click', function () { menu(!hd.classList.contains('open')); });
+    document.getElementById('nav-links').addEventListener('click', function (e) { if (e.target.closest('a')) menu(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') menu(false); });
+    document.addEventListener('click', function (e) { if (!hd.contains(e.target)) menu(false); });
+
     var on = function () { h.classList.toggle('scrolled', window.scrollY > 8); };
     on(); window.addEventListener('scroll', on, { passive: true });
     // logo: back to the top, and drop the #hash so a reload stays at the top

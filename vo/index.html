@@ -15,13 +15,13 @@
 <meta property="og:url" content="https://esp32.viennv.dev/vo/">
 <meta property="og:title" content="Vỏ in 3D Loa Ting · để bàn và HUD ô tô">
 <meta property="og:description" content="Một mạch, ba kiểu vỏ: để bàn, HUD nêm 20°, HUD thân phẳng trên đế 5 nấc. So sánh, cấu tạo, thiết kế và mô hình 3D.">
-<meta property="og:image" content="https://esp32.viennv.dev/assets/og-image.jpg?v=1">
+<meta property="og:image" content="https://esp32.viennv.dev/assets/og-image.jpg?v=2">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Vỏ in 3D Loa Ting · để bàn và HUD ô tô">
 <meta name="twitter:description" content="Một mạch, ba kiểu vỏ: để bàn, HUD nêm 20°, HUD thân phẳng trên đế 5 nấc. So sánh, cấu tạo, thiết kế và mô hình 3D.">
-<meta name="twitter:image" content="https://esp32.viennv.dev/assets/og-image.jpg?v=1">
+<meta name="twitter:image" content="https://esp32.viennv.dev/assets/og-image.jpg?v=2">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <script type="application/ld+json">
@@ -110,6 +110,16 @@
   .nav-links a:hover { color: var(--ink); }
   .nav-links a[aria-current="page"] { color: var(--ink); font-weight: 700; box-shadow: inset 0 -2px 0 var(--yellow); }
   .nav .btn { height: 40px; padding: 0 16px; font-size: 14px; border-radius: 11px; }
+  /* menu điện thoại: nút ☰ mở danh sách mục ngay dưới header */
+  .menu-btn { display: none; width: 44px; height: 44px; margin-right: -10px; border: 0; border-radius: 12px; background: transparent; color: var(--ink); cursor: pointer; place-items: center; }
+  .menu-btn:hover { background: rgba(255,255,255,.55); }
+  .menu-btn svg { width: 24px; height: 24px; }
+  .menu-btn path { transition: transform .2s, opacity .2s; transform-origin: 12px 12px; }
+  header.top.open .menu-btn .m1 { transform: translateY(5px) rotate(45deg); }
+  header.top.open .menu-btn .m2 { opacity: 0; }
+  header.top.open .menu-btn .m3 { transform: translateY(-5px) rotate(-45deg); }
+  .nav-links .nav-cta { display: none; }
+
 
   /* intro */
   .intro { padding: clamp(28px, 5vw, 56px) 0 clamp(24px, 3vw, 36px); }
@@ -279,6 +289,7 @@
   .cmp .group th, .cmp .group td { background: rgba(245,196,0,.1); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #8a6400; padding-top: 8px; padding-bottom: 8px; }
   .cmp .group th:first-child { background: #f7efce; }
   .cmp small { display: block; color: var(--muted); font-size: 13px; }
+  .swipe-hint { display: none; margin: 22px 0 -16px; font-size: 13.5px; font-weight: 600; color: var(--muted); }
   .choose { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 28px; }
   .choose a { display: block; text-decoration: none; background: var(--paper-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; }
   .choose a:hover { background: #fff; }
@@ -311,7 +322,17 @@
   :focus-visible { outline: 3px solid var(--navy); outline-offset: 3px; border-radius: 6px; }
 
   @media (max-width: 980px) {
-    .nav-links { display: none; }
+    .nav { justify-content: flex-start; }
+    .brand { margin-right: auto; }
+    .menu-btn { display: grid; }
+    .nav-links {
+      display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 0;
+      padding: 4px 20px 18px; background: var(--paper); border-bottom: 1px solid var(--line);
+      box-shadow: 0 18px 30px rgba(28,30,34,.12);
+    }
+    header.top.open .nav-links { display: flex; }
+    .nav-links a { padding: 13px 2px; font-size: 17px; font-weight: 600; color: var(--ink); border-bottom: 1px solid var(--line); box-shadow: none; }
+    .nav-links a[aria-current="page"] { color: var(--navy); box-shadow: inset 3px 0 0 var(--yellow); padding-left: 12px; }
     .details { grid-template-columns: 1fr 1fr; }
     .cmp-cards, .choose { grid-template-columns: 1fr 1fr; }
   }
@@ -326,12 +347,26 @@
   @media (max-width: 560px) {
     body { font-size: 16px; }
     .nav .btn { display: none; }
-    .cmp-cards, .choose, .details { grid-template-columns: 1fr; }
+    .choose, .details { grid-template-columns: 1fr; }
+    .swipe-hint { display: block; }
+    .stats dd { font-size: 16px; }
+    .stats div { padding: 10px 12px; }
+    .nav-links .nav-cta { display: block; margin-top: 12px; padding: 13px 16px; border: 0; border-radius: 13px; background: var(--navy); color: #fff; text-align: center; }
+    /* hàng vuốt ngang: thẻ sau ló ra một phần để biết còn nữa */
+    .cmp-cards { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px; margin-left: -20px; margin-right: -20px; padding: 2px 20px 12px; scroll-padding-left: 20px; max-width: none; scrollbar-width: none; }
+    .cmp-cards > .ccard { flex: 0 0 82%; scroll-snap-align: start; }
+    .cmp-cards::-webkit-scrollbar { display: none; }
+    .foot-links a { display: inline-block; padding: 8px 0; }
     .kv th, .kv td { display: block; width: auto; }
     .kv th { padding-bottom: 4px; border-top: 1px solid var(--line); }
     .kv td { padding-top: 4px; border-top: 0; }
-    .tab { padding: 0 12px; }
-    .tab small { display: none; }
+    /* 4 tab vừa một hàng */
+    .tablist { display: grid; grid-template-columns: repeat(4, auto); justify-content: space-between; gap: 4px; }
+    .tab { padding: 0 9px; font-size: 14.5px; gap: 0; }
+    .tab small, .tab .dot { display: none; }
+  }
+  @media (max-width: 420px) {
+    .tab .deg { display: none; }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -352,14 +387,16 @@
       </svg>
       Loa Ting
     </a>
-    <nav class="nav-links" aria-label="Mục lục">
+    <nav class="nav-links" id="nav-links" aria-label="Mục lục">
       <a href="../">Trang chủ</a>
       <a href="./" aria-current="page">Vỏ in 3D</a>
       <a href="../#hud">HUD ô tô</a>
       <a href="../#tinh-nang">Tính năng</a>
       <a href="../#hoi-dap">Hỏi đáp</a>
+      <a class="nav-cta" href="../#tu-lam">Tự làm một chiếc</a>
     </nav>
     <a class="btn btn-dark" href="../#tu-lam">Tự làm một chiếc</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Mở menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path class="m1" d="M4 7h16"/><path class="m2" d="M4 12h16"/><path class="m3" d="M4 17h16"/></svg></button>
   </div>
 </header>
 
@@ -383,7 +420,7 @@
   <div class="wrap tablist" role="tablist">
     <a class="tab" role="tab" id="tab-so-sanh" href="#so-sanh" aria-controls="so-sanh" aria-selected="true">So sánh</a>
     <a class="tab" role="tab" id="tab-de-ban" href="#de-ban" aria-controls="de-ban" aria-selected="false"><i class="dot" aria-hidden="true"></i>Để bàn <small>bản 3.1</small></a>
-    <a class="tab" role="tab" id="tab-hud-nem" href="#hud-nem" aria-controls="hud-nem" aria-selected="false"><i class="dot draft" aria-hidden="true"></i>HUD nêm 20°</a>
+    <a class="tab" role="tab" id="tab-hud-nem" href="#hud-nem" aria-controls="hud-nem" aria-selected="false"><i class="dot draft" aria-hidden="true"></i>HUD nêm<span class="deg"> 20°</span></a>
     <a class="tab" role="tab" id="tab-hud-phang" href="#hud-phang" aria-controls="hud-phang" aria-selected="false"><i class="dot draft" aria-hidden="true"></i>HUD phẳng <small>đế 5 nấc</small></a>
   </div>
 </nav>
@@ -425,6 +462,7 @@
     </a>
   </div>
 
+  <p class="swipe-hint" aria-hidden="true">Vuốt ngang bảng để xem cả 3 vỏ →</p>
   <div class="cmp-wrap" role="region" aria-label="Bảng so sánh ba kiểu vỏ" tabindex="0">
     <table class="cmp">
       <thead>
@@ -917,6 +955,14 @@
 <script>
   (function () {
     document.body.classList.remove('no-js');
+    // menu điện thoại
+    var mb = document.querySelector('.menu-btn'), hd = document.querySelector('header.top');
+    function menu(open) { hd.classList.toggle('open', open); mb.setAttribute('aria-expanded', String(open)); mb.setAttribute('aria-label', open ? 'Đóng menu' : 'Mở menu'); }
+    mb.addEventListener('click', function () { menu(!hd.classList.contains('open')); });
+    document.getElementById('nav-links').addEventListener('click', function (e) { if (e.target.closest('a')) menu(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') menu(false); });
+    document.addEventListener('click', function (e) { if (!hd.contains(e.target)) menu(false); });
+
     var y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear();
 
     // tabs: one panel at a time, the URL hash names the tab (#so-sanh, #de-ban, #hud-nem, #hud-phang)
