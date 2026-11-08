@@ -6,7 +6,7 @@
 
 ### Loa thông minh để bàn, vỏ in 3D
 
-**Trợ lý AI tiếng Việt · Nhạc · Đài VOV · Khung ảnh · Waze HUD · Báo thức · Lịch âm · Báo biến động số dư**
+**Trợ lý AI tiếng Việt · Nhạc · Đài VOV · Khung ảnh · Giá cả · Pomodoro · Waze HUD · Báo thức · Lịch âm · Báo biến động số dư**
 
 [![Website](https://img.shields.io/badge/🌐_esp32.viennv.dev-1E2A44?style=for-the-badge)](https://esp32.viennv.dev)
 ![Tải về](https://img.shields.io/badge/⬇️_Tải_về-Coming_soon-F5C518?style=for-the-badge)
@@ -16,7 +16,7 @@
 
 ---
 
-**Loa Ting** là chiếc loa nhỏ có màn hình cảm ứng 2,8″, chạy trên mạch **LCDWIKI ES3C28P (ESP32-S3)**. Firmware dựa trên [Xiaozhi ESP32](https://github.com/78/xiaozhi-esp32), được viết lại giao diện tiếng Việt và thêm nhạc, đài, khung ảnh, Waze HUD, báo thức, lịch âm và báo biến động số dư. Vỏ in 3D gồm 5 chi tiết, in một lần trên máy in nhiều màu.
+**Loa Ting** là chiếc loa nhỏ có màn hình cảm ứng 2,8″, chạy trên mạch **LCDWIKI ES3C28P (ESP32-S3)**. Firmware dựa trên [Xiaozhi ESP32](https://github.com/78/xiaozhi-esp32), được viết lại giao diện tiếng Việt (có thêm tiếng Anh) và thêm nhạc, đài, khung ảnh, giá cả, Pomodoro, Waze HUD, báo thức, lịch âm và báo biến động số dư. Vỏ để bàn in 3D gồm 5 chi tiết, in một lần trên máy in nhiều màu. Thay vỏ HUD là đặt được lên ô tô, hình dẫn đường phản chiếu lên kính lái.
 
 > Repo này chỉ chứa trang giới thiệu và các bản tải về. Mã nguồn để riêng tư.
 
@@ -34,8 +34,11 @@ Video review gần 5 phút: vỏ in 3D, rồi từng ứng dụng trên loa. Xem
 | 🎵 **Nhạc theo yêu cầu** | Nói tên bài, loa tự tìm trên Zing MP3 hoặc YouTube rồi phát, có ảnh bìa và sóng nhạc. |
 | 📻 **Đài trực tiếp** | VOV1, VOV2, VOV3, VOV Giao thông Hà Nội và TP.HCM, VOH. |
 | 🖼️ **Khung ảnh** | Lúc rảnh, loa chiếu ảnh từ album Google Photos bạn chọn, kèm giờ và thời tiết. |
-| 🚗 **Waze HUD** | Đặt trên xe: hướng rẽ, làn đường, tốc độ, biển giới hạn và cảnh báo camera, lấy từ Waze trên điện thoại. |
+| 🚗 **Waze HUD** | Đặt trên xe: hướng rẽ, làn đường, tốc độ, biển giới hạn và cảnh báo camera, nhận từ Waze Mod trên điện thoại qua Wi-Fi hoặc Bluetooth. |
 | ⏰ **Báo thức, đếm ngược** | Đặt bằng tay hoặc bằng giọng nói, lặp theo thứ, 10 âm báo có sẵn. |
+| 🍅 **Pomodoro** | 25 phút tập trung, 5 phút nghỉ, nghỉ dài sau 4 lượt; vẫn chạy khi đóng ứng dụng. |
+| 💰 **Giá cả** | Giá vàng, xăng dầu và tỷ giá ngoại tệ, tự cập nhật mỗi giờ. |
+| 🧮 **Máy tính, QR Wi-Fi** | Máy tính bỏ túi trên màn cảm ứng; mã QR cho khách quét là vào Wi-Fi. |
 | 🌤️ **Đồng hồ, thời tiết, lịch âm** | Giờ to, chất lượng không khí, dự báo 4 ngày; lịch tháng có ngày âm, tiết khí, giờ tốt. |
 | 🌙 **Ban đêm** | Màn hình tự dịu, chỉ còn đồng hồ to; thông báo được đọc thật nhỏ. |
 | 💸 **Báo biến động số dư** | “Ting” rồi đọc số tiền vừa nhận, có mã VietQR và lịch sử giao dịch. |
@@ -53,7 +56,21 @@ Video review gần 5 phút: vỏ in 3D, rồi từng ứng dụng trên loa. Xem
 - **Vỏ để bàn:** 104 × 52 × 92 mm, mặt trước ngả 20°; pin 18650 dưới đáy, công tắc nguồn; mặt trước cài 4 nẫy móc, không cần vít; 9 khe thoát nhiệt sau lưng.
 - **In 3D:** 5 chi tiết, khoảng 97 g nhựa, lưng xanh than hoặc đen, mặt trước vàng. File 3MF xếp sẵn bàn in 220 × 220.
 
+📐 **[Trang Vỏ in 3D](https://esp32.viennv.dev/vo/)**: so sánh 3 kiểu vỏ, thông số, cấu tạo, lý do thiết kế và mô hình 3D của từng vỏ.
+
 🧊 **[Xoay thử mô hình 3D](https://esp32.viennv.dev/3d/)** ngay trên trình duyệt: tách lớp, cắt dọc, giấu từng chi tiết.
+
+### 🚗 Vỏ HUD cho ô tô (bản xem 3D)
+
+<p align="center">
+  <img src="assets/hud-nem.jpg" width="48%" alt="Vỏ HUD dáng nêm 20° màu đen" />
+  <img src="assets/hud-phang.jpg" width="48%" alt="Vỏ HUD thân phẳng trên đế chỉnh góc" />
+</p>
+
+- **[Nêm 20°](https://esp32.viennv.dev/3d/hud-nem/):** 124 × 72 × 35 mm, 2 chi tiết, khoảng 49 g; hợp kính lái 30–35°.
+- **[Thân phẳng trên đế 5 nấc](https://esp32.viennv.dev/3d/hud-phang/):** thân 124 × 63 × 17 mm, chỉnh 10–40° cho mọi góc kính; 5 chi tiết in liền bản lề, không chốt, không vít, khoảng 125 g.
+- Cả hai: màu đen, loa của bộ mạch nằm cạnh màn để đọc cảnh báo, cổng USB-C bên trái hoặc phải, không pin (cắm nguồn xe), miếng thép trong đáy để hít giá nam châm. Nên in PETG hoặc ASA.
+- Mới có bản xem 3D; file in (STL, 3MF) sẽ có sau khi in thử.
 
 ## 📥 Tải về
 

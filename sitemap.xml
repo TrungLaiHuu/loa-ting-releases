@@ -4,14 +4,23 @@
         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url>
     <loc>https://esp32.viennv.dev/</loc>
-    <lastmod>2026-11-07</lastmod>
+    <lastmod>2026-11-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://esp32.viennv.dev/assets/og-image.jpg</image:loc>
     </image:image>
     <image:image>
-      <image:loc>https://esp32.viennv.dev/assets/loa-ting.jpg</image:loc>
+      <image:loc>https://esp32.viennv.dev/assets/loa-ting-ca-bo.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://esp32.viennv.dev/assets/hud-tren-xe.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://esp32.viennv.dev/assets/hud-nem.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://esp32.viennv.dev/assets/hud-phang.jpg</image:loc>
     </image:image>
     <video:video>
       <video:thumbnail_loc>https://esp32.viennv.dev/assets/review-poster.jpg</video:thumbnail_loc>
@@ -23,8 +32,35 @@
     </video:video>
   </url>
   <url>
+    <loc>https://esp32.viennv.dev/vo/</loc>
+    <lastmod>2026-11-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://esp32.viennv.dev/assets/vo-de-ban.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://esp32.viennv.dev/assets/hud-nem-tach-lop.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://esp32.viennv.dev/assets/hud-phang-tach-lop.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://esp32.viennv.dev/3d/</loc>
     <lastmod>2026-11-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esp32.viennv.dev/3d/hud-nem/</loc>
+    <lastmod>2026-11-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://esp32.viennv.dev/3d/hud-phang/</loc>
+    <lastmod>2026-11-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

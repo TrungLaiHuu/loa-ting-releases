@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Loa Ting · Loa thông minh để bàn, trợ lý AI tiếng Việt, vỏ in 3D</title>
-<meta name="description" content="Loa thông minh để bàn, màn hình cảm ứng 2,8″: trợ lý AI tiếng Việt, nhạc Zing/YouTube, đài VOV, khung ảnh, Waze HUD, báo thức, lịch âm, báo số dư. Vỏ in 3D.">
-<meta name="keywords" content="loa thông minh, loa thông minh để bàn, loa AI tiếng Việt, trợ lý ảo tiếng Việt, xiaozhi, xiaozhi esp32, ESP32-S3, ES3C28P, LCDWIKI, loa DIY, vỏ in 3D, in 3D nhiều màu, đài VOV, Waze HUD, khung ảnh Google Photos, loa báo chuyển khoản, loa báo số dư, VietQR, Loa Ting">
+<meta name="description" content="Loa thông minh để bàn, màn hình cảm ứng 2,8″: trợ lý AI tiếng Việt, nhạc, đài VOV, khung ảnh, giá vàng, báo thức, báo số dư. Vỏ in 3D, có vỏ HUD cho ô tô.">
+<meta name="keywords" content="loa thông minh, loa thông minh để bàn, loa AI tiếng Việt, trợ lý ảo tiếng Việt, xiaozhi, xiaozhi esp32, ESP32-S3, ES3C28P, LCDWIKI, loa DIY, vỏ in 3D, in 3D nhiều màu, đài VOV, Waze HUD, HUD ô tô, HUD kính lái, vỏ HUD in 3D, Waze Mod, khung ảnh Google Photos, giá vàng, Pomodoro, loa báo chuyển khoản, loa báo số dư, VietQR, Loa Ting">
 <meta name="author" content="viennv.dev">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#ECE9E4">
@@ -15,7 +15,7 @@
 <meta property="og:locale" content="vi_VN">
 <meta property="og:url" content="https://esp32.viennv.dev/">
 <meta property="og:title" content="Loa Ting · Nhỏ gọn, làm được nhiều việc">
-<meta property="og:description" content="Trợ lý AI nói tiếng Việt, nhạc theo yêu cầu, đài VOV, khung ảnh Google Photos, dẫn đường Waze, báo thức, lịch âm và báo biến động số dư, trên một chiếc loa nhỏ có vỏ in 3D.">
+<meta property="og:description" content="Trợ lý AI nói tiếng Việt, nhạc theo yêu cầu, đài VOV, khung ảnh Google Photos, giá vàng, báo thức, lịch âm và báo biến động số dư, trên một chiếc loa nhỏ có vỏ in 3D. Thay vỏ là thành HUD dẫn đường trên ô tô.">
 <meta property="og:image" content="https://esp32.viennv.dev/assets/og-image.jpg?v=1">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
@@ -27,7 +27,7 @@
 <meta property="og:video:height" content="720">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Loa Ting · Nhỏ gọn, làm được nhiều việc">
-<meta name="twitter:description" content="Trợ lý AI nói tiếng Việt, nhạc theo yêu cầu, đài VOV, khung ảnh Google Photos, dẫn đường Waze, báo thức, lịch âm và báo biến động số dư, trên một chiếc loa nhỏ có vỏ in 3D.">
+<meta name="twitter:description" content="Trợ lý AI nói tiếng Việt, nhạc theo yêu cầu, đài VOV, khung ảnh Google Photos, giá vàng, báo thức, lịch âm và báo biến động số dư, trên một chiếc loa nhỏ có vỏ in 3D. Thay vỏ là thành HUD dẫn đường trên ô tô.">
 <meta name="twitter:image" content="https://esp32.viennv.dev/assets/og-image.jpg?v=1">
 <meta name="twitter:image:alt" content="Loa Ting: loa thông minh để bàn, mặt trước vàng, lưng xanh than, màn hình đồng hồ và thời tiết">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -39,7 +39,7 @@
   "name": "Loa Ting",
   "url": "https://esp32.viennv.dev/",
   "inLanguage": "vi",
-  "description": "Loa thông minh để bàn, màn hình cảm ứng 2,8″: trợ lý AI tiếng Việt, nhạc Zing/YouTube, đài VOV, khung ảnh, Waze HUD, báo thức, lịch âm, báo số dư. Vỏ in 3D.",
+  "description": "Loa thông minh để bàn, màn hình cảm ứng 2,8″: trợ lý AI tiếng Việt, nhạc, đài VOV, khung ảnh, giá vàng, báo thức, báo số dư. Vỏ in 3D, có vỏ HUD cho ô tô.",
   "image": "https://esp32.viennv.dev/assets/og-image.jpg?v=1",
   "publisher": {
     "@type": "Organization",
@@ -130,23 +130,6 @@
   .btn-yellow { background: var(--yellow); color: var(--ink); }
   .btn-yellow:hover { background: var(--yellow-hi); }
   .btn-soon, .btn-soon:hover { background: var(--yellow); opacity: .55; cursor: default; }
-  /* mô hình 3D (mục Vỏ in 3D): ảnh xem trước, bấm thì nạp 3d/ vào khung; điện thoại mở trang riêng */
-  .model3d { margin-top: 28px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
-  .model3d-head { display: flex; align-items: center; justify-content: space-between; gap: 12px 20px; padding: 20px 24px; }
-  .model3d-head h3 { margin: 0; font-size: 20px; letter-spacing: -.01em; }
-  .model3d-head p { margin: 4px 0 0; color: var(--muted); font-size: 15px; }
-  .model3d-head .btn { flex: none; }
-  .model3d-stage { position: relative; aspect-ratio: 16 / 9; background: #e8e6e1; border-top: 1px solid var(--line); }
-  .model3d-stage img, .model3d-stage iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
-  .model3d-stage img { object-fit: cover; object-position: left center; transition: filter .2s; }
-  .model3d-load { position: absolute; inset: 0; display: block; }
-  .model3d-load:hover img { filter: brightness(.94); }
-  .model3d-cta { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); box-shadow: 0 10px 30px rgba(14,17,22,.28); }
-  .model3d-cta svg { width: 20px; height: 20px; }
-  @media (max-width: 760px) {
-    .model3d-head { flex-direction: column; align-items: flex-start; padding: 18px; }
-    .model3d-stage { aspect-ratio: 4 / 3; }
-  }
   .btn-line { border: 1.5px solid rgba(28,30,34,.28); color: var(--ink); background: transparent; }
   .btn-line:hover { background: rgba(255,255,255,.55); }
   .btn svg { width: 18px; height: 18px; flex: none; }
@@ -183,11 +166,22 @@
   .hero-art { position: relative; }
   .hero-art img { width: 100%; }
   .toast {
-    position: absolute; left: 0; bottom: 14%; max-width: 330px; display: flex; align-items: flex-start; gap: 12px;
+    position: absolute; right: 0; top: 0; max-width: 47%; display: flex; align-items: flex-start; gap: 12px;
     background: #fff; border-radius: 16px; padding: 12px 16px 12px 12px;
     box-shadow: 0 18px 40px rgba(28,30,34,.16), 0 2px 6px rgba(28,30,34,.08);
     animation: pop 7s ease-in-out infinite;
   }
+  /* nhãn trên vỏ HUD trong ảnh hero, dẫn xuống mục "Trên ô tô" */
+  .hud-tag {
+    position: absolute; right: 0; bottom: 2%; display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
+    background: #fff; border-radius: 14px; padding: 8px 14px 8px 8px; line-height: 1.25;
+    box-shadow: 0 14px 32px rgba(28,30,34,.15), 0 2px 6px rgba(28,30,34,.08); transition: transform .15s;
+  }
+  .hud-tag:hover { transform: translateY(-2px); }
+  .hud-tag .ico { width: 34px; height: 34px; border-radius: 10px; background: #1C1D1F; display: grid; place-items: center; flex: none; }
+  .hud-tag .ico svg { width: 18px; height: 18px; color: #3CCB7F; }
+  .hud-tag b { display: block; font-size: 14.5px; }
+  .hud-tag small { display: block; font-size: 12.5px; color: var(--muted); }
   .toast .ico {
     width: 40px; height: 40px; border-radius: 12px; background: var(--navy);
     display: grid; place-items: center; flex: none;
@@ -230,23 +224,49 @@
   .chapters b { color: var(--yellow); font-variant-numeric: tabular-nums; min-width: 40px; font-weight: 700; }
 
   /* case */
-  .case-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
-  .case-card { background: var(--paper-2); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; }
-  .case-card img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; background: #e6e2dc; }
-  .case-card .txt { padding: 20px 22px 24px; }
-  .case-card p { color: var(--muted); font-size: 16px; margin-top: 8px; }
-  .case-card.wide { grid-column: 1 / -1; display: grid; grid-template-columns: 1.25fr 1fr; align-items: center; }
-  .case-card.wide img { height: 100%; aspect-ratio: auto; min-height: 300px; }
-  .case-card.wide .txt { padding: 28px 30px; }
-  .colors { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
-  .colors span { display: inline-flex; align-items: center; gap: 9px; font-size: 14px; font-weight: 600; padding: 7px 12px 7px 8px; border-radius: 999px; background: #fff; border: 1px solid var(--line); }
-  .colors i { width: 22px; height: 22px; border-radius: 7px; display: block; box-shadow: inset 0 0 0 1px rgba(0,0,0,.12); }
 
   .details { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px 28px; margin-top: 40px; }
   .detail { display: flex; gap: 12px; align-items: flex-start; font-size: 16px; }
   .detail svg { width: 22px; height: 22px; flex: none; margin-top: 2px; color: var(--navy); }
   .detail b { display: block; font-weight: 700; }
   .detail span { color: var(--muted); }
+
+  /* vỏ HUD ô tô (mục nền tối): ảnh mô phỏng trên xe, hai thẻ vỏ, mỗi thẻ mở trang 3D riêng */
+  .dark .kicker { color: var(--yellow); }
+  .dark .badge { color: var(--yellow); background: rgba(245,196,0,.16); }
+  .dark .detail svg { color: var(--yellow); }
+  .dark .detail span { color: rgba(255,255,255,.66); }
+  .hud-intro { display: grid; grid-template-columns: .82fr 1.6fr; gap: clamp(28px, 4vw, 56px); align-items: center; }
+  .hud-shot { margin: 0; position: relative; border-radius: 22px; overflow: hidden; background: #000; box-shadow: 0 30px 60px rgba(0,0,0,.4); }
+  .hud-shot img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+  .hud-shot figcaption {
+    position: absolute; left: 14px; top: 14px; font-size: 13px; font-weight: 600; color: rgba(255,255,255,.86);
+    background: rgba(14,17,22,.62); padding: 6px 11px; border-radius: 999px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  }
+  .how { list-style: none; margin: 26px 0 0; padding: 0; display: grid; gap: 14px; counter-reset: how; }
+  .how li { display: flex; gap: 12px; font-size: 16px; line-height: 1.5; color: rgba(255,255,255,.74); }
+  .how li::before {
+    counter-increment: how; content: counter(how); flex: none; width: 26px; height: 26px; margin-top: 0; border-radius: 8px;
+    background: var(--yellow); color: var(--ink); font-size: 13px; font-weight: 800; display: grid; place-items: center;
+  }
+  .how b { color: #fff; font-weight: 700; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 22px; padding: 0; list-style: none; }
+  .chips li { font-size: 13.5px; font-weight: 600; padding: 5px 11px; border-radius: 999px; background: var(--paper); color: var(--ink); font-variant-numeric: tabular-nums; }
+  .hud-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-top: 28px; }
+  .hud-cta small { color: rgba(255,255,255,.6); font-size: 14px; max-width: 280px; }
+
+  /* mục 01: ba thẻ vỏ, mỗi thẻ mở tab của vỏ đó ở trang vo/ */
+  .vo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .vo-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; text-decoration: none; transition: box-shadow .15s, transform .15s; }
+  .vo-card:hover { box-shadow: 0 14px 30px rgba(28,30,34,.12); transform: translateY(-2px); }
+  .vo-card img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; background: #e6e3de; }
+  .vo-card .txt { padding: 18px 20px 20px; display: flex; flex-direction: column; flex: 1; }
+  .vo-card h3 { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .vo-card p { color: var(--muted); font-size: 15.5px; margin-top: 6px; }
+  .vo-card .chips { margin: 14px 0 0; }
+  .vo-card .more { margin-top: auto; padding-top: 16px; font-size: 15px; font-weight: 700; color: var(--navy); }
+  .vo-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-top: 28px; }
+  .vo-cta small { color: var(--muted); font-size: 14px; }
 
   /* assistant */
   .assistant { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-radius: 24px; overflow: hidden; margin-bottom: 40px; color: #fff; }
@@ -290,6 +310,8 @@
   .spec h3 { margin-bottom: 12px; }
   .spec ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; font-size: 16px; }
   .spec li { display: flex; gap: 10px; }
+  .spec-link { display: inline-block; margin-top: 14px; font-weight: 700; font-size: 15px; color: var(--navy); text-decoration: none; }
+  .spec-link:hover { text-decoration: underline; }
   .spec li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--yellow); margin-top: 10px; flex: none; box-shadow: 0 0 0 2px rgba(245,196,0,.25); }
 
   /* build steps */
@@ -333,16 +355,14 @@
   .dark :focus-visible { outline-color: var(--yellow); }
 
   @media (max-width: 980px) {
+    .nav-links { display: none; }
     .features { grid-template-columns: repeat(2, 1fr); }
     .details { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 860px) {
-    .nav-links { display: none; }
-    .hero-grid, .demo-grid, .assistant, .hw-grid { grid-template-columns: 1fr; }
+    .hero-grid, .demo-grid, .assistant, .hw-grid, .hud-intro, .vo-grid { grid-template-columns: 1fr; }
+    .vo-grid { max-width: 560px; }
     .hero-art { max-width: 560px; margin: 0 auto; }
-    .case-grid { grid-template-columns: 1fr; }
-    .case-card.wide { grid-template-columns: 1fr; }
-    .case-card.wide img { min-height: 0; aspect-ratio: 3 / 2; }
     .flow, .build { grid-template-columns: 1fr; max-width: 520px; }
     .assistant img { min-height: 0; aspect-ratio: 11 / 9; }
   }
@@ -350,7 +370,10 @@
     body { font-size: 16px; }
     .features, .details { grid-template-columns: 1fr; }
     .hero-cta .btn { flex: 1 1 100%; justify-content: center; }
-    .toast { left: 0; bottom: 6%; padding: 10px 12px 10px 10px; max-width: 280px; }
+    .toast { display: none; }
+    .hud-tag { bottom: -4%; padding: 6px 10px 6px 6px; gap: 8px; }
+    .hud-tag .ico { width: 28px; height: 28px; }
+    .hud-tag small { display: none; }
     .toast .ico { width: 34px; height: 34px; }
     .toast b { font-size: 14px; }
     .nav .btn { display: none; }
@@ -358,6 +381,8 @@
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .toast, .wave i { animation: none; }
+    .hud-tag { transition: none; }
+    .vo-card { transition: none; }
   }
 </style>
 </head>
@@ -376,7 +401,8 @@
     </a>
     <nav class="nav-links" aria-label="Mục lục">
       <a href="#video">Video</a>
-      <a href="#vo">Vỏ in 3D</a>
+      <a href="vo/">Vỏ in 3D</a>
+      <a href="#hud">HUD ô tô</a>
       <a href="#tinh-nang">Tính năng</a>
       <a href="#bao-so-du">Báo số dư</a>
       <a href="#hoi-dap">Hỏi đáp</a>
@@ -391,9 +417,9 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow"><i></i>Loa thông minh để bàn · vỏ in 3D</span>
+      <span class="eyebrow"><i></i>Loa thông minh · để bàn và trên ô tô</span>
       <h1>Nhỏ gọn, làm được <span class="hl">nhiều việc.</span></h1>
-      <p class="lead">Trợ lý AI nói tiếng Việt, nhạc theo yêu cầu, đài VOV, khung ảnh, dẫn đường Waze, báo thức và lịch âm, trên một màn hình cảm ứng 2,8″. Vỏ tự in ở nhà, mặt trước cài bằng nẫy.</p>
+      <p class="lead">Trợ lý AI nói tiếng Việt, nhạc theo yêu cầu, đài VOV, khung ảnh, giá vàng, báo thức và lịch âm, trên một màn hình cảm ứng 2,8″. Vỏ tự in ở nhà: để trên bàn, hoặc mang lên ô tô làm HUD dẫn đường.</p>
       <div class="hero-cta">
         <a class="btn btn-dark" href="#video">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.6-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z"/></svg>
@@ -403,15 +429,20 @@
       </div>
       <div class="facts">
         <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Gọi “Hey Ivy”, không cần chạm</span>
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>12 ứng dụng</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>16 ứng dụng</span>
         <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>In vỏ một lần, 2 màu</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Có vỏ HUD cho ô tô</span>
       </div>
     </div>
     <div class="hero-art">
-      <img src="assets/loa-ting.jpg" width="1080" height="940" alt="Loa Ting: thân xanh than, mặt trước vàng, màn hình hiện giờ, lịch âm và thời tiết, lưới loa ở dưới" fetchpriority="high">
+      <img src="assets/loa-ting-ca-bo.jpg" width="1200" height="853" alt="Ba kiểu vỏ Loa Ting: vỏ để bàn thân xanh than, mặt trước vàng, màn hình giờ và thời tiết; vỏ HUD thân phẳng trên đế chỉnh góc; phía trước là vỏ HUD nêm 20° màu đen. Hai vỏ HUD hiện Waze HUD rẽ trái 620 m, 35 km/h" fetchpriority="high">
+      <a class="hud-tag" href="#hud">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5 19.5 20l-7.5-4-7.5 4L12 2.5Z"/></svg></span>
+        <span><b>HUD ô tô</b><small>2 kiểu vỏ</small></span>
+      </a>
       <div class="toast" aria-hidden="true">
         <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg></div>
-        <div><b>“Hey Ivy, hôm nay có mưa không?”</b><small>Hà Nội nhiều mây, chiều tối có thể mưa rào nhẹ. Bạn nhớ mang ô nhé!</small>
+        <div><b>“Hey Ivy, hôm nay có mưa không?”</b><small>Chiều tối có mưa rào nhẹ, nhớ mang ô nhé!</small>
           <span class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
       </div>
     </div>
@@ -444,87 +475,73 @@
   </div>
 </section>
 
-<!-- VỎ -->
+<!-- VỎ: giới thiệu ngắn ba kiểu vỏ; thông số, cấu tạo, thiết kế và mô hình 3D ở trang vo/ -->
 <section class="section" id="vo">
   <div class="wrap">
     <div class="section-head">
       <span class="kicker">01 · Vỏ in 3D</span>
-      <h2>Vỏ in 3D, tính kỹ từng chi tiết</h2>
-      <p class="lead">Khối nêm 104 × 52 × 92 mm, vừa một góc bàn. Năm chi tiết nằm gọn trên một bàn in, không cần support.</p>
+      <h2>Một mạch, ba kiểu vỏ</h2>
+      <p class="lead">Để trên bàn, hoặc mang lên ô tô làm HUD trên kính lái. Vỏ nào cũng tự in ở nhà, và xoay thử được mô hình 3D ngay trên trình duyệt.</p>
     </div>
-    <div class="case-grid">
-      <article class="case-card">
-        <img src="assets/vo-nghieng.jpg" width="1200" height="800" loading="lazy" alt="Loa nhìn ngang: mặt trước màu vàng ngả về sau 20 độ, thân xanh than">
+    <div class="vo-grid">
+      <a class="vo-card" href="vo/#de-ban">
+        <img src="assets/vo-de-ban.jpg" width="1200" height="800" loading="lazy" alt="Vỏ để bàn: thân xanh than, mặt trước vàng ngả 20°, màn hình đồng hồ và thời tiết">
         <div class="txt">
-          <h3>Mặt trước ngả 20°</h3>
-          <p>Ngồi bàn là mắt nhìn thẳng vào màn hình. Màn cảm ứng nằm ngang, bên dưới là lưới loa chấm tròn có vải chắn bụi, micro ở mép phải.</p>
+          <h3>Để bàn</h3>
+          <p>Khối nêm vừa một góc bàn, mặt trước vàng ngả 20°, pin 18650 bên trong.</p>
+          <ul class="chips" aria-label="Thông số"><li>104 × 52 × 92 mm</li><li>5 chi tiết</li><li>≈97 g, 2 màu</li></ul>
+          <span class="more">Xem chi tiết →</span>
         </div>
-      </article>
-      <article class="case-card">
-        <img src="assets/vo-mat-sau.jpg" width="1200" height="800" loading="lazy" alt="Mặt sau loa: 9 khe thoát nhiệt, công tắc nguồn, 2 chốt RESET và BOOT, cổng USB-C bên hông">
+      </a>
+      <a class="vo-card" href="vo/#hud-nem">
+        <img src="assets/hud-nem.jpg" width="1200" height="800" loading="lazy" alt="Vỏ HUD dáng nêm màu đen, mặt màn nghiêng 20°, lưới loa bên trái màn">
         <div class="txt">
-          <h3>Mặt sau gọn gàng</h3>
-          <p>Công tắc nguồn và hai chốt bấm RESET / BOOT để nạp firmware mà không phải mở vỏ. Cổng sạc USB-C nằm bên hông trái.</p>
+          <h3>HUD nêm 20° <span class="badge">Bản xem 3D</span></h3>
+          <p>Đặt lên taplo là dùng, hợp kính lái 30–35° của sedan và SUV.</p>
+          <ul class="chips" aria-label="Thông số"><li>124 × 72 × 35 mm</li><li>2 chi tiết</li><li>≈49 g, đen</li></ul>
+          <span class="more">Xem chi tiết →</span>
         </div>
-      </article>
-      <article class="case-card">
-        <img src="assets/vo-luong-khi.jpg" width="1200" height="800" loading="lazy" alt="Nhìn xuyên vỏ: các hạt khí xanh đi vào qua lưới loa ở dưới, chuyển cam và thoát ra các khe sau lưng ở trên">
+      </a>
+      <a class="vo-card" href="vo/#hud-phang">
+        <img src="assets/hud-phang.jpg" width="1200" height="800" loading="lazy" alt="Vỏ HUD thân phẳng cài trên khay, chân chống nâng khay nghiêng 25°">
         <div class="txt">
-          <h3>Luồng khí tự nhiên</h3>
-          <p>Khí mát vào qua lưới loa ở dưới, nóng lên rồi thoát ra 9 khe sau lưng ở trên. Vừa sạc vừa phát nhạc, trong vỏ vẫn mát.</p>
+          <h3>HUD phẳng, đế 5 nấc <span class="badge">Bản xem 3D</span></h3>
+          <p>Chỉnh 10–40° cho mọi góc kính. Bản lề in liền, không chốt, không vít.</p>
+          <ul class="chips" aria-label="Thông số"><li>Thân 124 × 63 × 17 mm</li><li>5 chi tiết</li><li>≈125 g, đen</li></ul>
+          <span class="more">Xem chi tiết →</span>
         </div>
-      </article>
-      <article class="case-card">
-        <img src="assets/vo-thao-roi.jpg" width="1200" height="800" loading="lazy" alt="Vỏ tách lớp: mặt trước vàng, loa và thanh kẹp, bo mạch có màn hình, pin 18650 trong thân xanh than">
-        <div class="txt">
-          <h3>Mỗi thứ một chỗ</h3>
-          <p>Loa 40 × 28 mm nằm trong khung riêng, thanh kẹp ép chặt. Mạch bắt 4 trụ sau cửa sổ màn hình. Pin 18650 nằm trong khay in liền thân.</p>
-        </div>
-      </article>
-      <article class="case-card wide">
-        <img src="assets/vo-ban-in.jpg" width="1200" height="732" loading="lazy" alt="Bàn in 220 × 220 mm: thân xanh than, mặt trước vàng, thanh kẹp, 2 chốt và nắp bịt xếp sẵn">
-        <div class="txt">
-          <h3>In một lần trên máy nhiều màu</h3>
-          <p>File 3MF đã gán sẵn màu cho từng chi tiết. Máy có bộ đổi nhựa (AMS, MMU, CFS…) in cả bộ trong một lần; máy một màu thì in riêng từng màu. Hết khoảng 97 g nhựa.</p>
-          <div class="colors" aria-label="Các màu vỏ">
-            <span><i style="background:#1E2A44"></i>Lưng xanh than</span>
-            <span><i style="background:#1C1D1F"></i>Lưng đen</span>
-            <span><i style="background:#F5C400"></i>Mặt trước vàng</span>
-          </div>
-        </div>
-      </article>
+      </a>
     </div>
-    <div class="model3d" id="mo-hinh-3d">
-      <div class="model3d-head">
-        <div>
-          <h3>Xoay thử mô hình 3D</h3>
-          <p>Đúng mô hình dùng để in: xoay, tách lớp, cắt dọc, giấu từng chi tiết để nhìn vào bên trong.</p>
-        </div>
-        <a class="btn btn-line" href="3d/" target="_blank" rel="noopener">Mở toàn màn hình</a>
-      </div>
-      <div class="model3d-stage">
-        <a class="model3d-load" href="3d/" aria-label="Mở mô hình 3D của vỏ loa">
-          <img src="assets/mo-hinh-3d.jpg" width="1120" height="630" loading="lazy" alt="Trang xem 3D: vỏ loa lưng xanh than, mặt trước vàng, bên phải là các nút góc nhìn, tách lớp, cắt dọc và danh sách chi tiết">
-          <span class="btn btn-dark model3d-cta">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8 20 7.4v9.2l-8 4.6-8-4.6V7.4z"/><path d="M4 7.4l8 4.6 8-4.6M12 12v9.2"/></svg>
-            Xoay mô hình 3D
-          </span>
-        </a>
-      </div>
+    <div class="vo-cta">
+      <a class="btn btn-dark" href="vo/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8 20 7.4v9.2l-8 4.6-8-4.6V7.4z"/><path d="M4 7.4l8 4.6 8-4.6M12 12v9.2"/></svg>Trang Vỏ in 3D</a>
+      <a class="btn btn-line" href="vo/#so-sanh">So sánh 3 kiểu vỏ</a>
+      <small>Thông số, cấu tạo, lý do thiết kế và mô hình 3D của từng vỏ.</small>
     </div>
-    <div class="details">
-      <div class="detail">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4v6a5 5 0 0 0 10 0V4"/><path d="M4 20h16"/></svg>
-        <div><b>4 nẫy móc</b><span>Ấn vào nghe “tách” là chắc. Tháo bằng khe nạy ở mép dưới.</span></div>
+  </div>
+</section>
+
+<!-- TRÊN Ô TÔ: HUD dùng thế nào; hai vỏ HUD ở vo/ -->
+<section class="section dark" id="hud">
+  <div class="wrap">
+    <div class="hud-intro">
+      <div>
+        <span class="kicker">02 · Trên ô tô</span>
+        <h2>Lên xe, thành HUD trên kính lái</h2>
+        <p class="lead" style="margin-top:14px">Vẫn mạch đó, chỉ thay vỏ. Loa nằm trên taplo, hình dẫn đường phản chiếu lên kính ngay trước mắt, không phải cúi xuống nhìn điện thoại.</p>
+        <ol class="how">
+          <li><span><b>Waze Mod gửi chỉ đường</b> từ điện thoại sang loa, qua Wi-Fi hoặc Bluetooth.</span></li>
+          <li><span><b>Chạm đúp để lật hình.</b> Màn hiện hình ngược, phản chiếu lên kính thành chiều xuôi.</span></li>
+          <li><span><b>Loa đọc cảnh báo</b> camera, biển báo, và kêu bíp khi chạy quá tốc độ.</span></li>
+        </ol>
+        <div class="hud-cta">
+          <a class="btn btn-yellow" href="vo/#hud-nem">Xem 2 vỏ HUD</a>
+          <small>Nêm 20° cố định, hoặc thân phẳng trên đế 5 nấc. Mới có bản xem 3D.</small>
+        </div>
       </div>
-      <div class="detail">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="m6.5 6.5 11 11"/></svg>
-        <div><b>Đóng vỏ không cần vít</b><span>Hai vít đáy chỉ dùng khi muốn khóa hẳn mặt trước.</span></div>
-      </div>
-      <div class="detail">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
-        <div><b>Bàn in 220 × 220</b><span>Không cần support. PETG chịu nóng tốt, PLA vẫn được nếu để trong nhà.</span></div>
-      </div>
+      <figure class="hud-shot">
+        <img src="assets/hud-tren-xe.jpg" width="1200" height="800" loading="lazy" alt="Mô phỏng nhìn từ ghế lái ban đêm: hình Waze HUD rẽ trái 620 m, 35 km/h, biển 50 hiện trên kính lái, vỏ HUD đặt trên taplo bên dưới">
+        <figcaption>Mô phỏng nhìn từ ghế lái</figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -533,16 +550,16 @@
 <section class="section" id="tinh-nang" style="background: var(--paper-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line)">
   <div class="wrap">
     <div class="section-head">
-      <span class="kicker">02 · Phần mềm</span>
-      <h2>12 ứng dụng trên màn hình 2,8″</h2>
-      <p class="lead">Màn chính có ba trang: đồng hồ và thời tiết, lịch âm, biến động số dư. Vuốt xuống mở bảng điều khiển; vuốt lên mở menu hai trang, vuốt vòng tròn liên tục.</p>
+      <span class="kicker">03 · Phần mềm</span>
+      <h2>16 ứng dụng trên màn hình 2,8″</h2>
+      <p class="lead">Màn chính có ba trang: đồng hồ và thời tiết, lịch âm, biến động số dư. Vuốt xuống mở bảng điều khiển; vuốt lên mở menu hai trang, vuốt vòng tròn liên tục. Giao diện và giọng đọc có tiếng Việt và tiếng Anh.</p>
     </div>
 
     <div class="assistant dark">
       <img src="assets/tro-ly.jpg" width="1100" height="900" loading="lazy" alt="Loa đang trả lời câu hỏi thời tiết, sóng âm lan ra từ lưới loa">
       <div class="txt">
         <h3>Trợ lý AI “Hey Ivy”</h3>
-        <p>Gọi “Hey Ivy” rồi nói tiếng Việt tự nhiên: hỏi thời tiết, mở nhạc, mở đài, đặt báo thức, hẹn giờ. Chữ hiện ngay trên màn, giọng trả lời phát qua loa.</p>
+        <p>Gọi “Hey Ivy” rồi nói tiếng Việt tự nhiên: hỏi thời tiết, hỏi giá vàng, mở nhạc, mở đài, đặt báo thức, bật Pomodoro. Chữ hiện ngay trên màn, giọng trả lời phát qua loa.</p>
         <div class="chat">
           <div class="bubble me"><small>Bạn</small>Hey Ivy, hôm nay Hà Nội có mưa không?</div>
           <div class="bubble ai"><small>Loa</small>Hôm nay Hà Nội nhiều mây, chiều tối có thể mưa rào nhẹ. Nhiệt độ khoảng 21 đến 26 độ, bạn nhớ mang ô nhé!</div>
@@ -570,12 +587,22 @@
       <article class="feature">
         <div class="screen"><img src="assets/screens/waze-hud.png" width="640" height="480" loading="lazy" alt="Waze HUD: rẽ trái sau 350 m, tốc độ 47 km/h, biển giới hạn 50, camera tốc độ 300 m"></div>
         <h3>Waze HUD <span class="badge">Thử nghiệm</span></h3>
-        <p>Đặt trên xe: hướng rẽ, làn đường, tốc độ, biển giới hạn và cảnh báo camera, lấy từ Waze trên điện thoại.</p>
+        <p>Hướng rẽ, làn đường, tốc độ, biển giới hạn và cảnh báo camera, nhận từ Waze Mod trên điện thoại qua Wi-Fi hoặc Bluetooth. Có <a href="#hud">vỏ HUD riêng</a> để đặt trên xe.</p>
       </article>
       <article class="feature">
         <div class="screen"><img src="assets/screens/bao-thuc.png" width="640" height="480" loading="lazy" alt="Báo thức 07:15 đang reo với âm Gà gáy, nút Báo lại 5 phút và Tắt"></div>
         <h3>Báo thức, đếm ngược</h3>
         <p>Đặt bằng tay hoặc bằng giọng nói, lặp theo thứ. 10 âm báo có sẵn, từ gà gáy, chim hót tới chuông cổ điển, hoặc nhạc trên thẻ nhớ.</p>
+      </article>
+      <article class="feature">
+        <div class="screen"><img src="assets/screens/pomodoro.png" width="640" height="480" loading="lazy" alt="Pomodoro đang chạy: vòng đếm 23:59, Tập trung lượt 1/4, nút Tạm dừng, Bỏ qua, Đặt lại"></div>
+        <h3>Pomodoro <span class="badge">Mới</span></h3>
+        <p>25 phút tập trung, 5 phút nghỉ, nghỉ dài sau 4 lượt; đổi được độ dài. Vẫn chạy khi đóng ứng dụng, hết giờ thì reo và nhắc bằng giọng.</p>
+      </article>
+      <article class="feature">
+        <div class="screen"><img src="assets/screens/gia-ca.png" width="640" height="480" loading="lazy" alt="Ứng dụng Giá cả, tab Vàng: miếng SJC mua 138,0 bán 141,0, nhẫn 999.9 mua 136,3 bán 140,3 triệu/lượng"></div>
+        <h3>Giá cả <span class="badge">Mới</span></h3>
+        <p>Giá vàng, xăng dầu và tỷ giá ngoại tệ, ba tab trên một màn, tự cập nhật mỗi giờ. Hỏi “giá vàng hôm nay” là loa đọc.</p>
       </article>
       <article class="feature">
         <div class="screen"><img src="assets/screens/thoi-tiet.png" width="640" height="480" loading="lazy" alt="Trang thời tiết: 09:18, 23°, AQI 96, dự báo 4 ngày"></div>
@@ -588,13 +615,23 @@
         <p>Lịch tháng có ngày âm, tiết khí, ngày hoàng đạo, hắc đạo và giờ tốt trong ngày.</p>
       </article>
       <article class="feature">
+        <div class="screen"><img src="assets/screens/may-tinh.png" width="640" height="480" loading="lazy" alt="Máy tính: 1.234,5 × 3 = 3.703,5, bàn phím số và các phép tính"></div>
+        <h3>Máy tính <span class="badge">Mới</span></h3>
+        <p>Cộng trừ nhân chia, phần trăm, đổi dấu, phím to dễ bấm. Số viết kiểu Việt Nam: 1.234,5.</p>
+      </article>
+      <article class="feature">
+        <div class="screen"><img src="assets/screens/qr-wifi.png" width="640" height="480" loading="lazy" alt="QR Wi-Fi cho khách: mã QR, tên mạng Quan Ca Phe, mật khẩu 12345678"></div>
+        <h3>QR Wi-Fi <span class="badge">Mới</span></h3>
+        <p>Khách mở camera điện thoại quét mã là vào mạng, không phải đọc mật khẩu. Tên mạng và mật khẩu đặt trong trang cài đặt.</p>
+      </article>
+      <article class="feature">
         <div class="screen"><img src="assets/screens/dieu-khien.png" width="640" height="480" loading="lazy" alt="Bảng Điều khiển: âm lượng, độ sáng, màu đèn LED, các công tắc và nút Xoay 180°, Wi-Fi, Khởi động lại"></div>
         <h3>Bảng điều khiển</h3>
         <p>Vuốt từ mép trên xuống ở bất cứ màn nào: âm lượng, độ sáng, màu đèn LED, xoay màn hình 180°.</p>
       </article>
       <article class="feature">
-        <div class="screen"><img src="assets/screens/menu.png" width="640" height="480" loading="lazy" alt="Menu ứng dụng: Chat, Ảnh, Nhạc, FM, Hẹn giờ, Ban đêm, QR, Lịch sử"></div>
-        <h3>Menu 12 ứng dụng</h3>
+        <div class="screen"><img src="assets/screens/menu.png" width="640" height="480" loading="lazy" alt="Menu ứng dụng trang 1: Chat, Ảnh, Nhạc, FM, Hẹn giờ, Pomodoro, QR Wi-Fi, QR Bank"></div>
+        <h3>Menu 16 ứng dụng</h3>
         <p>Lưới 4 × 2 kiểu điện thoại, hai trang, vuốt vòng tròn. Vuốt lên trong một ứng dụng là về lại menu.</p>
       </article>
       <article class="feature">
@@ -605,12 +642,12 @@
       <article class="feature">
         <div class="screen"><img src="assets/screens/cai-dat.png" width="640" height="480" loading="lazy" alt="Màn Cài đặt: mã QR để mở trang cài đặt trên điện thoại, 3 bước kết nối"></div>
         <h3>Cài đặt bằng điện thoại</h3>
-        <p>Quét mã trên loa là mở trang cài đặt: Wi-Fi, album ảnh, giờ ban đêm, máy chủ trợ lý. Không cần cài app.</p>
+        <p>Quét mã trên loa là mở trang cài đặt: Wi-Fi, album ảnh, giờ ban đêm, máy chủ trợ lý, ngôn ngữ. Không cần cài app.</p>
       </article>
       <article class="feature">
-        <div class="screen"><img src="assets/screens/he-thong.png" width="640" height="480" loading="lazy" alt="Màn Hệ thống: Wi-Fi, địa chỉ IP, pin, RAM, thẻ nhớ, nhiệt độ chip, thời gian chạy, máy chủ"></div>
+        <div class="screen"><img src="assets/screens/he-thong.png" width="640" height="480" loading="lazy" alt="Màn Hệ thống: nút ngôn ngữ Tiếng Việt, Wi-Fi, địa chỉ IP, pin, thẻ nhớ, phiên bản, nhiệt độ chip, thời gian chạy, máy chủ"></div>
         <h3>Hệ thống</h3>
-        <p>Xem nhanh Wi-Fi, pin, thẻ nhớ, bộ nhớ, nhiệt độ chip và máy chủ đang dùng.</p>
+        <p>Hai trang: Wi-Fi, pin, thẻ nhớ, nhiệt độ chip; RAM, CPU, flash. Đổi tiếng Việt hoặc tiếng Anh ngay tại đây, có bản phần mềm mới thì loa báo.</p>
       </article>
     </div>
   </div>
@@ -665,8 +702,8 @@
 <section class="section" id="phan-cung" style="padding-top: 0">
   <div class="wrap">
     <div class="section-head" style="margin-bottom: 28px">
-      <h2>Một mạch, một vỏ</h2>
-      <p class="lead">Mạch mua sẵn, vỏ tự in.</p>
+      <h2>Mạch mua sẵn, vỏ tự in</h2>
+      <p class="lead">Cả ba kiểu vỏ dùng chung một mạch và một firmware.</p>
     </div>
     <div class="hw-grid">
       <div class="spec">
@@ -680,14 +717,13 @@
         </ul>
       </div>
       <div class="spec">
-        <h3>Vỏ để bàn</h3>
+        <h3>Vỏ in 3D</h3>
         <ul>
-          <li>104 × 52 × 92 mm, mặt trước ngả 20° cho dễ nhìn</li>
-          <li>Pin 18650 nằm dưới đáy, có công tắc nguồn</li>
-          <li>Mặt trước cài 4 nẫy móc, không cần vít; 2 vít đáy nếu muốn khóa hẳn</li>
-          <li>9 khe thoát nhiệt sau lưng, khí mát vào qua lưới loa</li>
-          <li>5 chi tiết, khoảng 97 g nhựa, lưng xanh than hoặc đen, mặt trước vàng. File 3MF xếp sẵn bàn in 220 × 220, in một lần trên máy nhiều màu</li>
+          <li><span><b>Để bàn:</b> 104 × 52 × 92 mm, pin 18650, 5 chi tiết, ≈97 g, lưng xanh than hoặc đen, mặt trước vàng</span></li>
+          <li><span><b>HUD nêm 20°:</b> 124 × 72 × 35 mm, 2 chi tiết, ≈49 g, đen, không pin</span></li>
+          <li><span><b>HUD phẳng:</b> thân 124 × 63 × 17 mm trên đế 5 nấc 10–40°, 5 chi tiết, ≈125 g, đen, không pin</span></li>
         </ul>
+        <a class="spec-link" href="vo/#so-sanh">Bảng so sánh đầy đủ →</a>
       </div>
     </div>
   </div>
@@ -704,7 +740,7 @@
       <div class="build-step">
         <div class="num">1</div>
         <h3>In vỏ, chuẩn bị</h3>
-        <p>In 5 chi tiết từ file 3MF có sẵn: một lần trên máy nhiều màu, hoặc riêng từng màu. Cần thêm mạch ES3C28P (kèm loa), một pin 18650 và một công tắc nhỏ.</p>
+        <p>Chọn một trong <a href="vo/">ba kiểu vỏ</a>. Vỏ để bàn in 5 chi tiết từ file 3MF có sẵn: một lần trên máy nhiều màu, hoặc riêng từng màu; cần thêm mạch ES3C28P (kèm loa), một pin 18650 và một công tắc nhỏ.</p>
       </div>
       <div class="build-step">
         <div class="num">2</div>
@@ -746,6 +782,14 @@
         <p>Có 2 bản: lưng xanh than hoặc lưng đen, cùng mặt trước vàng. File in của hai bản giống nhau; muốn màu nào thì nạp nhựa màu đó. Màu khai báo ở một chỗ trong mã nguồn vỏ, đổi màu khác cũng dễ.</p>
       </details>
       <details>
+        <summary>Dùng trên ô tô được không?</summary>
+        <p>Được, với một trong hai vỏ HUD: nêm 20° cố định, hoặc thân phẳng trên đế chỉnh 5 nấc (xem <a href="vo/#so-sanh">trang Vỏ in 3D</a>). Loa nhận chỉ đường từ Waze Mod trên điện thoại qua Wi-Fi hoặc Bluetooth; chạm đúp trong ứng dụng Waze HUD để lật hình cho đúng chiều trên kính. Nắng gắt ban ngày thì hình trên kính sẽ mờ, dán thêm phim phản xạ HUD lên kính sẽ rõ hơn. Hai vỏ này mới có bản xem 3D, file in sẽ có sau khi in thử.</p>
+      </details>
+      <details>
+        <summary>Loa có tiếng Anh không?</summary>
+        <p>Có. Màn hình, giọng đọc của loa và trang cài đặt đều có tiếng Việt và tiếng Anh. Đổi ở màn Hệ thống hoặc trong trang cài đặt, loa khởi động lại là xong.</p>
+      </details>
+      <details>
         <summary>Có phải cài app riêng cho loa không?</summary>
         <p>Không. Mọi cài đặt làm trên trình duyệt điện thoại, qua trang cài đặt của loa. Chỉ phần báo giao dịch cần một app chuyển tiếp thông báo.</p>
       </details>
@@ -759,7 +803,7 @@
       </details>
       <details>
         <summary>Ai làm ra Loa Ting?</summary>
-        <p>Loa Ting là một dự án của viennv.dev. Firmware dựa trên Xiaozhi ESP32, một dự án mã nguồn mở, được viết lại giao diện tiếng Việt và thêm nhạc, đài, khung ảnh, Waze HUD, báo thức, lịch âm và báo chuyển khoản.</p>
+        <p>Loa Ting là một dự án của viennv.dev. Firmware dựa trên Xiaozhi ESP32, một dự án mã nguồn mở, được viết lại giao diện tiếng Việt và thêm nhạc, đài, khung ảnh, Waze HUD, báo thức, lịch âm, giá cả, Pomodoro và báo chuyển khoản.</p>
       </details>
     </div>
   </div>
@@ -776,7 +820,8 @@
       </a>
       <nav class="foot-links" aria-label="Liên kết cuối trang">
         <a href="#video">Video</a>
-        <a href="#vo">Vỏ in 3D</a>
+        <a href="vo/">Vỏ in 3D</a>
+        <a href="#hud">HUD ô tô</a>
         <a href="#tinh-nang">Tính năng</a>
         <a href="#tu-lam">Tự làm</a>
         <a href="https://github.com/small-project-mmo/loa-ting-releases">GitHub</a>
@@ -797,16 +842,6 @@
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
       if (location.hash) history.replaceState(null, '', location.pathname + location.search);
-    });
-    // 3D model: on wide screens load 3d/ into the frame on click; phones open the page (dragging the
-    // model inside the page would trap scrolling)
-    var m3d = document.querySelector('.model3d-load');
-    if (m3d) m3d.addEventListener('click', function (e) {
-      if (window.matchMedia('(max-width: 760px)').matches) return;
-      e.preventDefault();
-      var f = document.createElement('iframe');
-      f.src = '3d/'; f.title = 'Mô hình 3D của vỏ loa'; f.allow = 'fullscreen';
-      m3d.replaceWith(f);
     });
     // chapter buttons jump the review video to their moment
     var v = document.getElementById('review');
