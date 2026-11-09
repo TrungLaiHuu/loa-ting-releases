@@ -69,6 +69,7 @@
   .nav-links a { text-decoration: none; color: var(--muted); }
   .nav-links a:hover { color: var(--ink); }
   .nav-links a[aria-current="page"] { color: var(--ink); font-weight: 700; box-shadow: inset 0 -2px 0 var(--yellow); }
+  .nav .btn[aria-current="page"] { background: var(--yellow); color: var(--ink); box-shadow: none; }
   .nav .btn { height: 40px; padding: 0 16px; font-size: 14px; border-radius: 11px; }
   .menu-btn { display: none; width: 44px; height: 44px; margin-right: -10px; border: 0; border-radius: 12px; background: transparent; color: var(--ink); cursor: pointer; place-items: center; }
   .menu-btn svg { width: 24px; height: 24px; }
@@ -86,6 +87,30 @@
   .facts { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 20px; font-size: 14px; font-weight: 600; color: var(--navy); }
   .facts span { display: inline-flex; align-items: center; gap: 8px; }
   .facts svg { width: 18px; height: 18px; color: var(--green); }
+
+  /* kiểm tra đúng mạch */
+  .check { display: grid; grid-template-columns: 1fr 1.2fr; background: var(--card); border: 1.5px solid rgba(183,121,31,.45); border-radius: var(--radius); overflow: hidden; margin-bottom: 20px; transition: border-color .2s; }
+  .check:has(#confirm:checked) { border-color: rgba(23,152,90,.55); }
+  .check .shots { background: #fff; border-right: 1px solid var(--line); display: grid; align-content: center; }
+  .check figure { margin: 0; }
+  .check figure + figure { border-top: 1px solid var(--line); }
+  .check figure img { display: block; width: 100%; height: auto; }
+  .check figcaption { font-size: 13px; color: var(--muted); padding: 10px 14px; border-top: 1px solid var(--line); background: var(--paper-2); }
+  .check .txt { padding: 22px 24px; }
+  .check h2 { font-size: clamp(21px, 2.4vw, 25px); font-weight: 800; display: flex; align-items: center; gap: 10px; }
+  .check h2 svg { width: 26px; height: 26px; flex: none; color: var(--amber); }
+  .check .lead2 { margin-top: 10px; font-size: 15.5px; color: var(--muted); }
+  .check .lead2 b { color: var(--ink); }
+  .marks { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 7px; font-size: 15px; }
+  .marks li { display: flex; gap: 10px; align-items: flex-start; }
+  .marks li::before { content: ""; flex: none; width: 20px; height: 20px; margin-top: 2px; border-radius: 50%; background: var(--green) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 12.5 4 4L18 8"/></svg>') center / 14px no-repeat; }
+  .marks.no li::before { background-color: var(--red); background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.4" stroke-linecap="round"><path d="M7 7l10 10M17 7 7 17"/></svg>'); }
+  .marks-h { font-size: 12.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 16px 0 0; }
+  .confirm { display: flex; gap: 12px; align-items: flex-start; margin-top: 18px; padding: 13px 15px; border-radius: 12px; background: rgba(245,196,0,.16); border: 1px solid rgba(183,121,31,.35); font-weight: 600; font-size: 15.5px; cursor: pointer; }
+  .confirm input { flex: none; width: 20px; height: 20px; margin: 1px 0 0; accent-color: var(--green); }
+  .check:has(#confirm:checked) .confirm { background: rgba(23,152,90,.1); border-color: rgba(23,152,90,.35); }
+  .need-confirm { font-size: 13.5px; color: var(--amber); font-weight: 600; text-align: center; }
+  .need-confirm[hidden] { display: none; }
 
   /* flasher */
   .flasher { display: grid; grid-template-columns: 1fr 1.15fr; gap: 20px; align-items: start; padding-bottom: 36px; }
@@ -194,10 +219,13 @@
     .nav-links a[aria-current="page"] { color: var(--navy); box-shadow: inset 3px 0 0 var(--yellow); padding-left: 12px; }
     .flasher { grid-template-columns: 1fr; }
   }
+  @media (max-width: 860px) { .check { grid-template-columns: 1fr; } .check .shots { border-right: 0; border-bottom: 1px solid var(--line); grid-template-columns: 1fr 1fr; } .check figure + figure { border-top: 0; border-left: 1px solid var(--line); } }
+  @media (max-width: 560px) { .check .shots { grid-template-columns: 1fr; } .check figure + figure { border-left: 0; border-top: 1px solid var(--line); } }
   @media (max-width: 760px) { .qa { grid-template-columns: 1fr; } }
   @media (max-width: 560px) {
     body { font-size: 16px; } .nav .btn { display: none; }
     .nav-links .nav-cta { display: block; margin-top: 12px; padding: 13px 16px; border: 0; border-radius: 13px; background: var(--navy); color: #fff; text-align: center; }
+    .nav-links .nav-cta[aria-current="page"] { background: var(--yellow); color: var(--ink); box-shadow: none; padding-left: 16px; }
     .panel { padding: 18px; } .pct { font-size: 44px; }
     .steps li { grid-template-columns: 24px 1fr; } .steps li .det { grid-column: 2; text-align: left; margin-top: -6px; }
   }
@@ -213,14 +241,13 @@
       Loa Ting
     </a>
     <nav class="nav-links" id="nav-links" aria-label="Mục lục">
-      <a href="../">Trang chủ</a>
+      <a href="../#tinh-nang">Tính năng</a>
       <a href="../vo/">Vỏ in 3D</a>
       <a href="../tai-lieu/">Tài liệu</a>
-      <a href="./" aria-current="page">Nạp firmware</a>
       <a href="../#hoi-dap">Hỏi đáp</a>
-      <a class="nav-cta" href="../#tu-lam">Tự làm một chiếc</a>
+      <a class="nav-cta" href="../nap/" aria-current="page">Nạp firmware</a>
     </nav>
-    <a class="btn btn-dark" href="../#tu-lam">Tự làm một chiếc</a>
+    <a class="btn btn-dark nav-btn" href="../nap/" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 7V3m6 4V3M7 7h10v4a5 5 0 0 1-10 0V7zM12 16v5"/></svg>Nạp firmware</a>
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Mở menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path class="m1" d="M4 7h16"/><path class="m2" d="M4 12h16"/><path class="m3" d="M4 17h16"/></svg></button>
   </div>
 </header>
@@ -235,6 +262,38 @@
       <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Chrome hoặc Edge trên máy tính</span>
       <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Cập nhật giữ nguyên Wi-Fi và cài đặt</span>
       <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Đối chiếu MD5 sau khi ghi</span>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" aria-label="Kiểm tra đúng mạch">
+  <div class="check" id="check">
+    <div class="shots">
+      <figure>
+        <a href="../assets/mach-es3c28p-truoc.jpg" target="_blank" rel="noopener"><img src="../assets/mach-es3c28p-truoc.jpg" width="900" height="600" alt="Mặt trước mạch LCDWIKI ES3C28P: màn 2,8 inch, chữ MIC và lỗ mic ở cạnh trái"></a>
+        <figcaption><b>Mặt trước:</b> màn 2,8 inch, chữ <b>MIC</b> và lỗ mic ở cạnh trái.</figcaption>
+      </figure>
+      <figure>
+        <a href="../assets/mach-es3c28p-sau.jpg" target="_blank" rel="noopener"><img src="../assets/mach-es3c28p-sau.jpg" width="900" height="600" alt="Mặt sau mạch LCDWIKI ES3C28P: in chữ 2.8 inch LCD Display, ESP32-S3 240x320, Capacitive Touch; cổng USB-C, nút BOOT, RESET, khe thẻ nhớ"></a>
+        <figcaption><b>Mặt sau:</b> dòng chữ <b>Capacitive Touch</b> ở góc trái, cạnh khe thẻ nhớ.</figcaption>
+      </figure>
+    </div>
+    <div class="txt">
+      <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4.5M12 17.5v.5"/></svg>Kiểm tra đúng mạch trước khi nạp</h2>
+      <p class="lead2">Firmware này chỉ dành cho mạch <b>LCDWIKI ES3C28P</b>: màn 2,8 inch <b>có cảm ứng điện dung</b>, chip ESP32-S3 N16R8. Trang tự kiểm được chip ESP32-S3 và flash 16 MB, nhưng <b>không phân biệt được bản có hay không có cảm ứng</b>, nên bạn cần tự đối chiếu với ảnh.</p>
+      <p class="marks-h">Đúng mạch</p>
+      <ul class="marks">
+        <li><span>Mặt trước: màn 2,8 inch, chữ <b>MIC</b> ở cạnh trái.</span></li>
+        <li><span>Mặt sau in "2.8" LCD Display · ESP32-S3 240x320 · <b>Capacitive Touch</b>".</span></li>
+        <li><span>Cổng USB-C, hai nút BOOT và RESET, khe thẻ nhớ TF.</span></li>
+        <li><span>Cổng loa ghi SPEAKER (thường kèm loa nhỏ) và cổng pin BAT.</span></li>
+      </ul>
+      <p class="marks-h">Không dùng được</p>
+      <ul class="marks no">
+        <li><span><b>ES3N28P</b>: cùng kiểu nhưng không có cảm ứng (mặt sau không có chữ Capacitive Touch).</span></li>
+        <li><span>Bản 3,5 inch, bản 2,4 inch, hoặc mạch dùng ESP32 thường (không phải S3).</span></li>
+      </ul>
+      <label class="confirm"><input type="checkbox" id="confirm"><span>Tôi đã kiểm tra: đúng mạch ES3C28P 2,8 inch có cảm ứng.</span></label>
     </div>
   </div>
 </section>
@@ -267,6 +326,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 7V3m6 4V3M7 7h10v4a5 5 0 0 1-10 0V7zM12 16v5"/></svg>
         <span id="go-t">Kết nối và nạp</span>
       </button>
+      <p class="need-confirm" id="need-confirm" hidden>Đánh dấu "đúng mạch" ở khung phía trên để mở nút nạp.</p>
     </div>
 
     <div class="alert warn" id="no-serial" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4.5M12 17.5v.5"/></svg><p><b>Trình duyệt này chưa nạp được.</b> Nạp trên web cần Web Serial: dùng <b>Chrome</b> hoặc <b>Edge</b> trên máy tính (Windows, macOS, Linux). Safari, Firefox và iPhone chưa hỗ trợ.</p></div>
@@ -368,7 +428,14 @@ const ICON = {
 // phần trăm tổng: mỗi bước một trọng số theo thời gian nó thường mất
 const WEIGHT = { connect: 3, chip: 3, backup: 30, download: 6, erase: 10, write: 46, verify: 0, reset: 2 };
 const STEP_NAMES = Object.keys(WEIGHT);
-let manifest = null, manifestBase = null, running = false, testMode = false;
+let manifest = null, manifestBase = null, running = false, testMode = false, usable = false;
+const confirmEl = document.getElementById("confirm");
+// nút nạp: có firmware, trình duyệt có Web Serial, người dùng đã xác nhận đúng mạch, không đang nạp
+function updateGo() {
+  const serialOk = "serial" in navigator;
+  $("go").disabled = !(usable && serialOk && confirmEl.checked) || running;
+  $("need-confirm").hidden = !(usable && serialOk && !confirmEl.checked);
+}
 const prog = {};
 
 // ---------- nhật ký
@@ -461,7 +528,7 @@ async function loadManifest() {
   const ver = manifest?.version ? "Loa Ting " + manifest.version : "Loa Ting";
   $("ver").textContent = ver;
   const badge = $("badge"), bt = $("badge-t");
-  const usable = manifest && manifest.available && Array.isArray(manifest.parts) && manifest.parts.length > 0;
+  usable = !!(manifest && manifest.available && Array.isArray(manifest.parts) && manifest.parts.length > 0);
   if (!usable) {
     badge.className = "badge soon"; bt.textContent = "Coming soon"; $("soon").hidden = false;
     $("go-t").textContent = "Nạp firmware · Coming soon";
@@ -475,9 +542,8 @@ async function loadManifest() {
     $("t-update").textContent = "≈ " + mb1(sizes((p) => p.update)) + ", dưới 1 phút";
     $("t-full").textContent = "≈ " + mb1(sizes(() => true)) + ", 2–5 phút";
   }
-  const serialOk = "serial" in navigator;
-  $("no-serial").hidden = serialOk;
-  $("go").disabled = !(usable && serialOk);
+  $("no-serial").hidden = "serial" in navigator;
+  updateGo();
   return usable;
 }
 
@@ -684,15 +750,16 @@ async function flash() {
     running = false;
     if (wake) wake.release().catch(() => {});
     document.querySelectorAll("input[name=mode], #backup").forEach((el) => el.disabled = false);
-    $("go").disabled = !(manifest && manifest.available && "serial" in navigator);
+    updateGo();
   }
 }
 
 document.querySelectorAll("input[name=mode]").forEach((r) => r.addEventListener("change", () => {
   $("backup-row").hidden = document.querySelector("input[name=mode]:checked").value !== "full";
 }));
-$("go").addEventListener("click", () => { if (!running) flash(); });
-$("retry").addEventListener("click", () => { if (!running) flash(); });
+confirmEl.addEventListener("change", updateGo);
+$("go").addEventListener("click", () => { if (!running && confirmEl.checked) flash(); });
+$("retry").addEventListener("click", () => { if (!running && confirmEl.checked) flash(); });
 $("again").addEventListener("click", () => { resetSteps(document.querySelector("input[name=mode]:checked").value, $("backup").checked); });
 window.addEventListener("beforeunload", (e) => { if (running) { e.preventDefault(); e.returnValue = ""; } });
 

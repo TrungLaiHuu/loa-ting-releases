@@ -147,6 +147,7 @@
   .nav-links { display: flex; gap: 26px; font-size: 15px; font-weight: 500; }
   .nav-links a { text-decoration: none; color: var(--muted); }
   .nav-links a:hover { color: var(--ink); }
+  .nav .btn[aria-current="page"] { background: var(--yellow); color: var(--ink); box-shadow: none; }
   .nav .btn { height: 40px; padding: 0 16px; font-size: 14px; border-radius: 11px; }
   /* menu điện thoại: nút ☰ mở danh sách mục ngay dưới header */
   .menu-btn { display: none; width: 44px; height: 44px; margin-right: -10px; border: 0; border-radius: 12px; background: transparent; color: var(--ink); cursor: pointer; place-items: center; }
@@ -438,16 +439,13 @@
       Loa Ting
     </a>
     <nav class="nav-links" id="nav-links" aria-label="Mục lục">
-      <a href="#video">Video</a>
-      <a href="vo/">Vỏ in 3D</a>
-      <a href="#hud">HUD ô tô</a>
       <a href="#tinh-nang">Tính năng</a>
-      <a href="#bao-so-du">Báo số dư</a>
+      <a href="vo/">Vỏ in 3D</a>
       <a href="tai-lieu/">Tài liệu</a>
       <a href="#hoi-dap">Hỏi đáp</a>
-      <a class="nav-cta" href="#tu-lam">Tự làm một chiếc</a>
+      <a class="nav-cta" href="nap/">Nạp firmware</a>
     </nav>
-    <a class="btn btn-dark" href="#tu-lam">Tự làm một chiếc</a>
+    <a class="btn btn-dark nav-btn" href="nap/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 7V3m6 4V3M7 7h10v4a5 5 0 0 1-10 0V7zM12 16v5"/></svg>Nạp firmware</a>
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Mở menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path class="m1" d="M4 7h16"/><path class="m2" d="M4 12h16"/><path class="m3" d="M4 17h16"/></svg></button>
   </div>
 </header>
