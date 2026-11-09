@@ -616,10 +616,10 @@ export XZ_KEY=$(openssl rand -hex 16)
     <div class="two">
       <div class="card">
         <h4>iPhone · Phím tắt (Shortcuts)</h4>
-        <p>iPhone không cho app khác đọc thông báo của app ngân hàng, nên cách này dùng SMS biến động số dư.</p>
+        <p>Từ iOS 27, Phím tắt chạy được khi một app gửi thông báo, nên dùng thẳng thông báo của app ngân hàng. iOS cũ hơn: dùng SMS biến động số dư (Tự động hoá → <b>Tin nhắn</b>, người gửi là tên ngân hàng).</p>
         <ol>
-          <li>Tự động hoá → Tạo mới → <b>Tin nhắn</b>, người gửi là tên ngân hàng, chọn chạy ngay không cần hỏi.</li>
-          <li>Lấy số tiền từ nội dung bằng <b>Khớp văn bản</b> (ví dụ biểu thức <code>[+-][\d,.]+</code>).</li>
+          <li>Phím tắt → Tự động hoá → <b>+</b> → <b>Thông báo</b> → chọn app ngân hàng (lọc thêm theo tiêu đề hoặc nội dung nếu cần) → chạy ngay, không cần hỏi.</li>
+          <li>Lấy số tiền từ nội dung thông báo bằng <b>Khớp văn bản</b> (ví dụ biểu thức <code>[+-][\d,.]+</code>).</li>
           <li>Thêm <b>Nhận nội dung của URL</b>: phương thức POST, header <code>X-Token</code>, thân JSON <code>amount</code>, <code>bank</code>, <code>content</code>.</li>
         </ol>
       </div>
@@ -632,7 +632,7 @@ export XZ_KEY=$(openssl rand -hex 16)
         </ol>
       </div>
     </div>
-    <div class="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4.5M12 17.5v.5"/></svg><p>Mỗi ngân hàng viết thông báo một kiểu. Thử với <code>"test": true</code> vài lần trước khi bật thật, và kiểm số tiền loa đọc khớp với app ngân hàng.</p></div>
+    <div class="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4.5M12 17.5v.5"/></svg><p>Mỗi ngân hàng viết thông báo một kiểu. Thử với <code>"test": true</code> vài lần trước khi bật thật, và kiểm số tiền loa đọc khớp với app ngân hàng. Trên iOS 27.0 có báo cáo tự động hoá theo thông báo thỉnh thoảng không chạy, nên dùng thử vài ngày trước khi dựa hẳn vào nó.</p></div>
   </div>
 
   <div class="block" id="sd-may-chu">
