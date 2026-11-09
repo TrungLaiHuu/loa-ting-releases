@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nạp firmware Loa Ting · ngay trên trình duyệt</title>
+<meta name="description" content="Nạp firmware cho Loa Ting ngay trên Chrome hoặc Edge: cắm cáp USB, bấm một nút, xem từng bước và phần trăm. Cập nhật giữ nguyên Wi-Fi và cài đặt, hoặc cài mới có sao lưu.">
+<meta name="author" content="viennv.dev">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#ECE9E4">
+<link rel="canonical" href="https://esp32.viennv.dev/nap/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Loa Ting">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:url" content="https://esp32.viennv.dev/nap/">
+<meta property="og:title" content="Nạp firmware Loa Ting ngay trên trình duyệt">
+<meta property="og:description" content="Cắm cáp USB, bấm một nút, xem từng bước và phần trăm. Không cần cài phần mềm.">
+<meta property="og:image" content="https://esp32.viennv.dev/assets/og-image.jpg?v=3">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Nạp firmware Loa Ting ngay trên trình duyệt">
+<meta name="twitter:description" content="Cắm cáp USB, bấm một nút, xem từng bước và phần trăm. Không cần cài phần mềm.">
+<meta name="twitter:image" content="https://esp32.viennv.dev/assets/og-image.jpg?v=3">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<!--
+  Trang "Nạp firmware" (https://esp32.viennv.dev/nap/): Web Serial + esptool-js 0.7.0 (vendor/, Apache-2.0),
+  kiểm MD5 bằng spark-md5 (MIT). Đọc ../firmware/manifest.json (firmware/make-manifest.py): phiên bản, từng file,
+  địa chỉ, SHA-256; "available": false thì nút nạp ở trạng thái Coming soon. Thử cục bộ:
+  ?manifest=/duong/dan/manifest.json (chỉ đường dẫn cùng trang, không nhận địa chỉ trang khác).
+  Hai chế độ: Cập nhật (file có "update": true, giữ NVS) và Cài lần đầu (xoá sạch, ghi đủ, mặc định sao lưu 16 MB).
+-->
+<style>
+  :root {
+    --paper: #ECE9E4; --paper-2: #F6F4F0; --card: #FFFFFF; --ink: #1C1E22; --navy: #1E2A44; --navy-2: #26334F;
+    --muted: #5C6168; --line: rgba(28, 30, 34, .12); --yellow: #F5C400; --yellow-hi: #FFE14A; --green: #17985A;
+    --red: #C2413B; --amber: #B7791F; --radius: 18px; --wrap: 1120px; --head: 64px;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 400 17px/1.6 "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  .wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 20px; }
+  h1, h2, h3, h4 { margin: 0; line-height: 1.15; letter-spacing: -.02em; text-wrap: balance; }
+  p { margin: 0; }
+  code { font-family: var(--mono); font-size: .88em; background: rgba(28,30,34,.07); padding: 1px 6px; border-radius: 6px; }
+
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 48px; padding: 0 20px; border-radius: 13px; font-weight: 700; font-size: 15.5px; text-decoration: none; border: 0; cursor: pointer; font-family: inherit; transition: transform .15s, background .15s, opacity .15s; }
+  .btn:active { transform: translateY(1px); }
+  .btn svg { width: 18px; height: 18px; flex: none; }
+  .btn-dark { background: var(--navy); color: #fff; box-shadow: 0 6px 18px rgba(30,42,68,.22); }
+  .btn-dark:hover { background: var(--navy-2); }
+  .btn-yellow { background: var(--yellow); color: var(--ink); }
+  .btn-yellow:hover { background: var(--yellow-hi); }
+  .btn-line { border: 1.5px solid rgba(28,30,34,.28); color: var(--ink); background: transparent; }
+  .btn-line:hover { background: rgba(255,255,255,.55); }
+  .btn[disabled] { opacity: .5; cursor: not-allowed; box-shadow: none; }
+
+  header.top { position: sticky; top: 0; z-index: 30; background: rgba(236,233,228,.9); backdrop-filter: saturate(1.4) blur(12px); -webkit-backdrop-filter: saturate(1.4) blur(12px); }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: var(--head); gap: 16px; }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; font-size: 19px; letter-spacing: -.02em; }
+  .brand svg { width: 32px; height: 32px; }
+  .nav-links { display: flex; gap: 24px; font-size: 15px; font-weight: 500; }
+  .nav-links a { text-decoration: none; color: var(--muted); }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a[aria-current="page"] { color: var(--ink); font-weight: 700; box-shadow: inset 0 -2px 0 var(--yellow); }
+  .nav .btn { height: 40px; padding: 0 16px; font-size: 14px; border-radius: 11px; }
+  .menu-btn { display: none; width: 44px; height: 44px; margin-right: -10px; border: 0; border-radius: 12px; background: transparent; color: var(--ink); cursor: pointer; place-items: center; }
+  .menu-btn svg { width: 24px; height: 24px; }
+  .menu-btn path { transition: transform .2s, opacity .2s; transform-origin: 12px 12px; }
+  header.top.open .menu-btn .m1 { transform: translateY(5px) rotate(45deg); }
+  header.top.open .menu-btn .m2 { opacity: 0; }
+  header.top.open .menu-btn .m3 { transform: translateY(-5px) rotate(-45deg); }
+  .nav-links .nav-cta { display: none; }
+
+  .intro { padding: clamp(28px, 5vw, 56px) 0 clamp(20px, 3vw, 32px); }
+  .crumb { font-size: 14px; color: var(--muted); margin-bottom: 14px; }
+  .crumb a { text-decoration: none; }
+  .intro h1 { font-size: clamp(34px, 5vw, 56px); font-weight: 800; letter-spacing: -.035em; max-width: 860px; }
+  .intro .lead { margin-top: 14px; max-width: 720px; font-size: clamp(17px, 1.6vw, 19px); color: var(--muted); }
+  .facts { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 20px; font-size: 14px; font-weight: 600; color: var(--navy); }
+  .facts span { display: inline-flex; align-items: center; gap: 8px; }
+  .facts svg { width: 18px; height: 18px; color: var(--green); }
+
+  /* flasher */
+  .flasher { display: grid; grid-template-columns: 1fr 1.15fr; gap: 20px; align-items: start; padding-bottom: 36px; }
+  .flasher > * { min-width: 0; }
+  .panel { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; }
+  .ver { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .ver small { display: block; font-size: 12.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .ver b { font-size: 22px; font-weight: 800; letter-spacing: -.01em; }
+  .badge { display: inline-flex; align-items: center; gap: 7px; font-weight: 700; font-size: 13px; padding: 5px 11px; border-radius: 999px; white-space: nowrap; }
+  .badge i { width: 8px; height: 8px; border-radius: 50%; display: block; }
+  .badge.ok { background: rgba(23,152,90,.12); color: #0f6e40; } .badge.ok i { background: var(--green); }
+  .badge.soon { background: rgba(245,196,0,.24); color: #7a5900; } .badge.soon i { background: var(--yellow); }
+  .badge.test { background: rgba(30,42,68,.1); color: var(--navy); } .badge.test i { background: var(--navy); }
+  .badge.bad { background: rgba(194,65,59,.12); color: #9b2f2a; } .badge.bad i { background: var(--red); }
+  .h { font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 22px 0 10px; }
+  .modes { display: grid; gap: 10px; }
+  .mode { display: grid; grid-template-columns: 22px 1fr; gap: 4px 12px; align-items: start; padding: 14px 16px; border: 1.5px solid var(--line); border-radius: 14px; cursor: pointer; background: var(--paper-2); }
+  .mode:has(input:checked) { border-color: var(--navy); background: #fff; box-shadow: inset 0 0 0 1px var(--navy); }
+  .mode input { margin: 4px 0 0; width: 18px; height: 18px; accent-color: var(--navy); }
+  .mode b { font-size: 16px; }
+  .mode span { grid-column: 2; font-size: 14.5px; color: var(--muted); line-height: 1.45; }
+  .mode em { font-style: normal; font-weight: 600; color: var(--navy); }
+  .backup { display: flex; gap: 10px; align-items: flex-start; margin-top: 12px; padding: 12px 14px; border-radius: 12px; background: rgba(245,196,0,.12); font-size: 14.5px; }
+  .backup input { margin: 3px 0 0; width: 17px; height: 17px; accent-color: var(--navy); flex: none; }
+  .backup[hidden] { display: none; }
+  .go { margin-top: 20px; display: grid; gap: 10px; }
+  .go .btn { width: 100%; height: 54px; font-size: 16.5px; }
+  .need { margin: 18px 0 0; padding: 0; list-style: none; display: grid; gap: 7px; font-size: 14.5px; color: var(--muted); }
+  .need li { display: flex; gap: 9px; }
+  .need svg { width: 18px; height: 18px; flex: none; margin-top: 2px; color: var(--navy); }
+  .alert { margin-top: 16px; padding: 12px 14px; border-radius: 12px; font-size: 14.5px; display: flex; gap: 10px; }
+  .alert[hidden] { display: none; }
+  .alert svg { width: 19px; height: 19px; flex: none; margin-top: 2px; }
+  .alert.warn { background: rgba(245,196,0,.16); border: 1px solid rgba(183,121,31,.3); } .alert.warn svg { color: var(--amber); }
+  .alert.info { background: rgba(30,42,68,.06); border: 1px solid rgba(30,42,68,.14); } .alert.info svg { color: var(--navy); }
+
+  .status-top { display: flex; align-items: flex-end; justify-content: space-between; gap: 14px; }
+  .pct { font-size: 52px; font-weight: 800; letter-spacing: -.04em; line-height: 1; font-variant-numeric: tabular-nums; }
+  .pct small { font-size: 22px; font-weight: 700; color: var(--muted); margin-left: 2px; }
+  .now { text-align: right; font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .now b { display: block; color: var(--ink); font-size: 15.5px; font-weight: 700; }
+  .bar { height: 12px; border-radius: 999px; background: var(--paper); margin-top: 14px; overflow: hidden; box-shadow: inset 0 0 0 1px var(--line); }
+  .bar > i { display: block; height: 100%; width: 0; border-radius: 999px; background: linear-gradient(90deg, var(--navy), #3B5EA8); transition: width .25s ease; }
+  .bar.done > i { background: var(--green); }
+  .bar.err > i { background: var(--red); }
+  .steps { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 2px; }
+  .steps li { display: grid; grid-template-columns: 26px 1fr auto; gap: 12px; align-items: center; padding: 9px 4px; border-top: 1px solid var(--line); font-size: 15px; }
+  .steps li:first-child { border-top: 0; }
+  .steps li[hidden] { display: none; }
+  .ic { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: var(--paper); color: var(--muted); }
+  .ic svg { width: 15px; height: 15px; }
+  .steps li .lbl { font-weight: 600; color: var(--muted); }
+  .steps li .det { font-size: 13.5px; color: var(--muted); font-variant-numeric: tabular-nums; text-align: right; }
+  .steps li.active .ic { background: var(--navy); color: #fff; }
+  .steps li.active .lbl { color: var(--ink); }
+  .steps li.done .ic { background: var(--green); color: #fff; }
+  .steps li.done .lbl { color: var(--ink); }
+  .steps li.error .ic { background: var(--red); color: #fff; }
+  .steps li.error .lbl { color: var(--red); }
+  .steps li.skip .lbl, .steps li.skip .det { opacity: .5; }
+  .spin { animation: spin 1s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .device { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 14px; font-size: 13.5px; color: var(--muted); }
+  .device[hidden] { display: none; }
+  .device b { color: var(--ink); font-weight: 600; font-family: var(--mono); font-size: 12.5px; }
+  .result { margin-top: 16px; border-radius: 14px; padding: 16px 18px; }
+  .result[hidden] { display: none; }
+  .result h3 { font-size: 18px; display: flex; align-items: center; gap: 9px; }
+  .result h3 svg { width: 22px; height: 22px; }
+  .result p, .result li { font-size: 15px; margin-top: 6px; }
+  .result ol, .result ul { margin: 8px 0 0; padding-left: 20px; }
+  .result.ok { background: rgba(23,152,90,.1); border: 1px solid rgba(23,152,90,.25); } .result.ok h3 { color: #0f6e40; }
+  .result.bad { background: rgba(194,65,59,.08); border: 1px solid rgba(194,65,59,.25); } .result.bad h3 { color: #9b2f2a; }
+  .result .row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .result .btn { height: 40px; font-size: 14px; padding: 0 14px; border-radius: 11px; }
+  details.log { margin-top: 16px; border-top: 1px solid var(--line); padding-top: 12px; }
+  details.log summary { cursor: pointer; font-size: 14px; font-weight: 600; color: var(--muted); display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  details.log summary::-webkit-details-marker { display: none; }
+  details.log pre { margin: 10px 0 0; max-height: 260px; overflow: auto; background: #161B26; color: #D9DEE8; border-radius: 12px; padding: 12px 14px; font: 12.5px/1.55 var(--mono); white-space: pre-wrap; word-break: break-all; }
+  .copylog { font: 600 12.5px/1 "Be Vietnam Pro", sans-serif; padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--paper-2); cursor: pointer; }
+
+  .help { padding: clamp(36px, 6vw, 64px) 0; border-top: 1px solid var(--line); }
+  .help h2 { font-size: clamp(26px, 3.2vw, 34px); font-weight: 800; margin-bottom: 18px; }
+  .qa { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .qa > div { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; }
+  .qa h4 { font-size: 16.5px; font-weight: 700; margin-bottom: 6px; }
+  .qa p, .qa li { font-size: 15px; color: var(--muted); }
+  .qa ul { margin: 6px 0 0; padding-left: 18px; }
+
+  footer { padding: 48px 0 56px; border-top: 1px solid var(--line); }
+  .foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; }
+  .maker { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+  .maker img { width: 48px; height: 48px; }
+  .maker small { display: block; color: var(--muted); font-size: 13px; }
+  .maker b { font-size: 17px; }
+  .foot-links { display: flex; flex-wrap: wrap; gap: 10px 24px; font-size: 15px; }
+  .foot-links a { color: var(--muted); text-decoration: none; }
+  .fine { margin-top: 28px; color: var(--muted); font-size: 13.5px; }
+  :focus-visible { outline: 3px solid var(--navy); outline-offset: 3px; border-radius: 6px; }
+
+  @media (max-width: 980px) {
+    .nav { justify-content: flex-start; } .brand { margin-right: auto; } .menu-btn { display: grid; }
+    .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 0; padding: 4px 20px 18px; background: var(--paper); border-bottom: 1px solid var(--line); box-shadow: 0 18px 30px rgba(28,30,34,.12); }
+    header.top.open .nav-links { display: flex; }
+    .nav-links a { padding: 13px 2px; font-size: 17px; font-weight: 600; color: var(--ink); border-bottom: 1px solid var(--line); box-shadow: none; }
+    .nav-links a[aria-current="page"] { color: var(--navy); box-shadow: inset 3px 0 0 var(--yellow); padding-left: 12px; }
+    .flasher { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 760px) { .qa { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) {
+    body { font-size: 16px; } .nav .btn { display: none; }
+    .nav-links .nav-cta { display: block; margin-top: 12px; padding: 13px 16px; border: 0; border-radius: 13px; background: var(--navy); color: #fff; text-align: center; }
+    .panel { padding: 18px; } .pct { font-size: 44px; }
+    .steps li { grid-template-columns: 24px 1fr; } .steps li .det { grid-column: 2; text-align: left; margin-top: -6px; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .spin { animation: none; } .bar > i { transition: none; } }
+</style>
+</head>
+<body id="top">
+
+<header class="top">
+  <div class="wrap nav">
+    <a class="brand" href="../" aria-label="Loa Ting, về trang chủ">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#1E2A44"/><rect x="4" y="4" width="24" height="24" rx="5.5" fill="#F5C400"/><rect x="8" y="7.5" width="16" height="9" rx="2" fill="#0E1116"/><g fill="#1E2A44"><circle cx="10.5" cy="20.5" r="1.1"/><circle cx="14.2" cy="20.5" r="1.1"/><circle cx="17.8" cy="20.5" r="1.1"/><circle cx="21.5" cy="20.5" r="1.1"/><circle cx="12.3" cy="24" r="1.1"/><circle cx="16" cy="24" r="1.1"/><circle cx="19.7" cy="24" r="1.1"/></g></svg>
+      Loa Ting
+    </a>
+    <nav class="nav-links" id="nav-links" aria-label="Mục lục">
+      <a href="../">Trang chủ</a>
+      <a href="../vo/">Vỏ in 3D</a>
+      <a href="../tai-lieu/">Tài liệu</a>
+      <a href="./" aria-current="page">Nạp firmware</a>
+      <a href="../#hoi-dap">Hỏi đáp</a>
+      <a class="nav-cta" href="../#tu-lam">Tự làm một chiếc</a>
+    </nav>
+    <a class="btn btn-dark" href="../#tu-lam">Tự làm một chiếc</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Mở menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path class="m1" d="M4 7h16"/><path class="m2" d="M4 12h16"/><path class="m3" d="M4 17h16"/></svg></button>
+  </div>
+</header>
+
+<main>
+<section class="intro">
+  <div class="wrap">
+    <p class="crumb"><a href="../">Loa Ting</a> / Nạp firmware</p>
+    <h1>Nạp firmware ngay trên trình duyệt</h1>
+    <p class="lead">Cắm mạch vào máy tính bằng cáp USB-C, bấm một nút. Trang kiểm tra đúng mạch, tải firmware, ghi và đối chiếu từng file, rồi khởi động lại loa. Không cần cài phần mềm nào.</p>
+    <div class="facts">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Chrome hoặc Edge trên máy tính</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Cập nhật giữ nguyên Wi-Fi và cài đặt</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Đối chiếu MD5 sau khi ghi</span>
+    </div>
+  </div>
+</section>
+
+<section class="wrap flasher" aria-label="Nạp firmware">
+  <div class="panel">
+    <div class="ver">
+      <div><small>Firmware</small><b id="ver">Loa Ting …</b></div>
+      <span class="badge soon" id="badge"><i></i><span id="badge-t">Đang tải…</span></span>
+    </div>
+
+    <p class="h">Chọn cách nạp</p>
+    <div class="modes" role="radiogroup">
+      <label class="mode"><input type="radio" name="mode" value="update" checked>
+        <b>Cập nhật</b>
+        <span>Loa đã chạy Loa Ting. Chỉ thay phần mềm; giữ Wi-Fi, token, lịch sử giao dịch, mọi cài đặt. <em id="t-update">≈ 1 phút</em></span>
+      </label>
+      <label class="mode"><input type="radio" name="mode" value="full">
+        <b>Cài lần đầu</b>
+        <span>Mạch mới, hoặc đang chạy firmware khác. Xoá sạch rồi ghi đủ các phần. <em id="t-full">≈ 3–5 phút</em></span>
+      </label>
+    </div>
+    <label class="backup" id="backup-row" hidden>
+      <input type="checkbox" id="backup" checked>
+      <span><b>Sao lưu firmware đang có trước khi xoá</b> (16 MB, ≈ 2 phút). Trình duyệt tải về một file <code>.bin</code>; nạp lại file đó là trả mạch về như cũ.</span>
+    </label>
+
+    <div class="go">
+      <button class="btn btn-dark" id="go" type="button" disabled>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 7V3m6 4V3M7 7h10v4a5 5 0 0 1-10 0V7zM12 16v5"/></svg>
+        <span id="go-t">Kết nối và nạp</span>
+      </button>
+    </div>
+
+    <div class="alert warn" id="no-serial" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4.5M12 17.5v.5"/></svg><p><b>Trình duyệt này chưa nạp được.</b> Nạp trên web cần Web Serial: dùng <b>Chrome</b> hoặc <b>Edge</b> trên máy tính (Windows, macOS, Linux). Safari, Firefox và iPhone chưa hỗ trợ.</p></div>
+    <div class="alert info" id="soon" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5v.5"/></svg><p><b>Sắp có.</b> Nút nạp mở khi firmware được phát hành. Trước đó, bạn vẫn đọc được các bước bên dưới.</p></div>
+
+    <ul class="need">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v5M17 3v5M5 8h14v4a7 7 0 0 1-14 0V8zM12 19v2"/></svg><span>Cáp USB-C <b>có truyền dữ liệu</b> (cáp chỉ để sạc thì máy không thấy mạch).</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg><span>Đóng chương trình khác đang mở cổng của mạch (Arduino, esptool, <code>nap-firmware.command</code>).</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><circle cx="12" cy="12" r="5"/></svg><span>Không rút cáp và giữ tab này mở cho tới khi trang báo xong.</span></li>
+    </ul>
+  </div>
+
+  <div class="panel" aria-live="polite">
+    <div class="status-top">
+      <div class="pct"><span id="pct">0</span><small>%</small></div>
+      <div class="now"><b id="now">Chưa bắt đầu</b><span id="speed">&nbsp;</span></div>
+    </div>
+    <div class="bar" id="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-labelledby="now"><i id="bar-i"></i></div>
+    <ol class="steps" id="steps">
+      <li data-step="connect"><span class="ic"></span><span class="lbl">Kết nối cổng USB</span><span class="det"></span></li>
+      <li data-step="chip"><span class="ic"></span><span class="lbl">Kiểm tra mạch</span><span class="det"></span></li>
+      <li data-step="backup" hidden><span class="ic"></span><span class="lbl">Sao lưu firmware cũ</span><span class="det"></span></li>
+      <li data-step="download"><span class="ic"></span><span class="lbl">Tải và kiểm tra firmware</span><span class="det"></span></li>
+      <li data-step="erase" hidden><span class="ic"></span><span class="lbl">Xoá flash</span><span class="det"></span></li>
+      <li data-step="write"><span class="ic"></span><span class="lbl">Ghi firmware</span><span class="det"></span></li>
+      <li data-step="verify"><span class="ic"></span><span class="lbl">Đối chiếu MD5</span><span class="det"></span></li>
+      <li data-step="reset"><span class="ic"></span><span class="lbl">Khởi động lại loa</span><span class="det"></span></li>
+    </ol>
+    <div class="device" id="device" hidden></div>
+
+    <div class="result ok" id="ok" hidden>
+      <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.8 2.8L16.5 9.5"/></svg><span id="ok-t">Nạp xong</span></h3>
+      <ol id="ok-steps">
+        <li>Rút cáp nếu muốn; loa đã tự khởi động lại.</li>
+        <li>Mạch mới: vào Wi-Fi <b>Xiaozhi-xxxx</b> của loa bằng điện thoại để chọn mạng nhà.</li>
+        <li>Quét mã ở Menu → Cài đặt để mở trang <b>/setup</b>. Hướng dẫn thêm ở <a href="../tai-lieu/">Tài liệu</a>.</li>
+      </ol>
+      <div class="row"><button class="btn btn-line" type="button" id="again">Nạp thêm loa khác</button></div>
+    </div>
+    <div class="result bad" id="bad" hidden>
+      <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg><span id="bad-t">Chưa nạp được</span></h3>
+      <p id="bad-msg"></p>
+      <ul id="bad-hints"></ul>
+      <div class="row"><button class="btn btn-dark" type="button" id="retry">Thử lại</button></div>
+    </div>
+
+    <details class="log" id="logbox">
+      <summary><span>Nhật ký chi tiết</span><button class="copylog" type="button" id="copylog">Chép</button></summary>
+      <pre id="log"></pre>
+    </details>
+  </div>
+</section>
+
+<section class="help">
+  <div class="wrap">
+    <h2>Khi có trục trặc</h2>
+    <div class="qa">
+      <div><h4>Không thấy cổng nào trong danh sách</h4><ul><li>Đổi sang cáp có truyền dữ liệu, cắm thẳng vào máy (không qua hub).</li><li>Windows 10/11 và macOS không cần cài driver cho mạch này.</li><li>Vẫn không thấy: giữ nút <b>BOOT</b>, bấm <b>RESET</b>, thả <b>BOOT</b>, rồi bấm nạp lại.</li></ul></div>
+      <div><h4>"Cổng đang bận"</h4><p>Một chương trình khác đang mở cổng: đóng Arduino, cửa sổ esptool hay tab nạp khác, rồi thử lại.</p></div>
+      <div><h4>Đứt giữa chừng</h4><p>Không sao: mạch vẫn vào được chế độ nạp. Cắm lại và nạp lần nữa; nếu loa không lên, chọn <b>Cài lần đầu</b>.</p></div>
+      <div><h4>File sao lưu dùng làm gì</h4><p>Đó là toàn bộ 16 MB flash trước khi xoá (firmware gốc của hãng hoặc bản bạn đang dùng). Giữ lại để trả mạch về như cũ bằng esptool khi cần.</p></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <a class="maker" href="https://viennv.dev" rel="noopener"><img src="../assets/viennv-logo.png" width="96" height="96" alt=""><span><small>Một dự án của</small><b>viennv.dev</b></span></a>
+      <nav class="foot-links" aria-label="Liên kết cuối trang">
+        <a href="../">Trang chủ</a><a href="../vo/">Vỏ in 3D</a><a href="../tai-lieu/">Tài liệu</a><a href="https://github.com/small-project-mmo/loa-ting-releases">GitHub</a>
+      </nav>
+    </div>
+    <p class="fine">© <span id="year">2026</span> Loa Ting. Nạp bằng <a href="https://github.com/espressif/esptool-js">esptool-js</a> 0.7.0 của Espressif (Apache-2.0), chạy hoàn toàn trên máy bạn.</p>
+  </div>
+</footer>
+
+<script src="vendor/spark-md5-3.0.2.min.js"></script>
+<script type="module">
+import { ESPLoader, Transport } from "./vendor/esptool-js-0.7.0.js";
+
+const $ = (id) => document.getElementById(id);
+document.getElementById("year").textContent = new Date().getFullYear();
+// menu điện thoại
+const mb = document.querySelector(".menu-btn"), hd = document.querySelector("header.top");
+const menu = (open) => { hd.classList.toggle("open", open); mb.setAttribute("aria-expanded", String(open)); };
+mb.addEventListener("click", () => menu(!hd.classList.contains("open")));
+document.addEventListener("click", (e) => { if (!hd.contains(e.target)) menu(false); });
+
+const BAUD = 921600;
+const ICON = {
+  wait: '<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="3"/></svg>',
+  active: '<svg class="spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 3a9 9 0 1 0 9 9"/></svg>',
+  done: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>',
+  error: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M7 7l10 10M17 7 7 17"/></svg>',
+  skip: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 12h12"/></svg>',
+};
+// phần trăm tổng: mỗi bước một trọng số theo thời gian nó thường mất
+const WEIGHT = { connect: 3, chip: 3, backup: 30, download: 6, erase: 10, write: 46, verify: 0, reset: 2 };
+const STEP_NAMES = Object.keys(WEIGHT);
+let manifest = null, manifestBase = null, running = false, testMode = false;
+const prog = {};
+
+// ---------- nhật ký
+const logEl = $("log");
+function log(line) {
+  const t = new Date().toLocaleTimeString("vi-VN", { hour12: false });
+  logEl.textContent += `[${t}] ${line}\n`;
+  if (logEl.textContent.length > 200000) logEl.textContent = logEl.textContent.slice(-150000);
+  logEl.scrollTop = logEl.scrollHeight;
+}
+let onTerminal = null;
+const terminal = {
+  clean() {},
+  writeLine(s) { log(s); if (onTerminal) onTerminal(s); },
+  write(s) { if (s && s.trim()) log(s.trim()); },
+};
+$("copylog").addEventListener("click", (e) => {
+  e.preventDefault();
+  navigator.clipboard?.writeText(logEl.textContent).then(() => { e.target.textContent = "Đã chép"; setTimeout(() => e.target.textContent = "Chép", 1500); });
+});
+
+// ---------- hiển thị bước và phần trăm
+function stepEl(name) { return document.querySelector(`[data-step="${name}"]`); }
+function setStep(name, state, detail) {
+  const li = stepEl(name);
+  li.classList.remove("active", "done", "error", "skip");
+  if (state !== "wait") li.classList.add(state);
+  li.querySelector(".ic").innerHTML = ICON[state];
+  if (detail !== undefined) li.querySelector(".det").textContent = detail;
+  if (state === "done" || state === "skip") prog[name] = 1;
+  if (state === "active") $("now").textContent = li.querySelector(".lbl").textContent + "…";
+  render();
+}
+function setDetail(name, detail) { stepEl(name).querySelector(".det").textContent = detail; }
+function progress(name, frac) { prog[name] = Math.max(0, Math.min(1, frac)); render(); }
+function render() {
+  let total = 0, done = 0;
+  for (const s of STEP_NAMES) {
+    if (stepEl(s).hidden) continue;
+    total += WEIGHT[s];
+    done += WEIGHT[s] * (prog[s] || 0);
+  }
+  const p = total ? Math.floor(done / total * 100) : 0;
+  $("pct").textContent = p;
+  $("bar-i").style.width = p + "%";
+  $("bar").setAttribute("aria-valuenow", p);
+}
+function resetSteps(mode, backup) {
+  stepEl("backup").hidden = !(mode === "full" && backup);
+  stepEl("erase").hidden = mode !== "full";
+  for (const s of STEP_NAMES) { prog[s] = 0; setStep(s, "wait", ""); }
+  $("bar").classList.remove("done", "err");
+  $("ok").hidden = $("bad").hidden = true;
+  $("device").hidden = true;
+  $("speed").innerHTML = "&nbsp;";
+  $("now").textContent = "Chưa bắt đầu";
+  render();
+}
+const mb1 = (n) => (n / 1048576).toLocaleString("vi-VN", { maximumFractionDigits: 1, minimumFractionDigits: 1 }) + " MB";
+function rate(bytes, ms) {
+  if (ms < 500 || bytes <= 0) return "";
+  const bps = bytes / (ms / 1000);
+  return (bps / 1024).toLocaleString("vi-VN", { maximumFractionDigits: 0 }) + " KB/s";
+}
+function eta(remaining, bytes, ms) {
+  if (ms < 1500 || bytes <= 0) return "";
+  const s = Math.max(0, Math.round(remaining / (bytes / (ms / 1000))));
+  return s >= 60 ? `còn ≈ ${Math.floor(s / 60)} phút ${s % 60} giây` : `còn ≈ ${s} giây`;
+}
+function speedLine(text) { $("speed").textContent = text || " "; }
+
+// ---------- manifest
+async function loadManifest() {
+  const q = new URLSearchParams(location.search).get("manifest");
+  let url = "../firmware/manifest.json";
+  if (q) {
+    // bản thử: chỉ nhận đường dẫn trên chính trang này (không có "//" hay "scheme:")
+    if (/^[\w\-./]+\.json$/.test(q) && !q.includes("//") && !q.includes("..")) { url = q; testMode = true; }
+    else log("Bỏ qua ?manifest không hợp lệ: chỉ nhận đường dẫn .json trên trang này.");
+  }
+  try {
+    const r = await fetch(url, { cache: "no-store" });
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    manifest = await r.json();
+    manifestBase = new URL(url, location.href);
+  } catch (e) {
+    log("Không đọc được manifest (" + url + "): " + e.message);
+    manifest = null;
+  }
+  const ver = manifest?.version ? "Loa Ting " + manifest.version : "Loa Ting";
+  $("ver").textContent = ver;
+  const badge = $("badge"), bt = $("badge-t");
+  const usable = manifest && manifest.available && Array.isArray(manifest.parts) && manifest.parts.length > 0;
+  if (!usable) {
+    badge.className = "badge soon"; bt.textContent = "Coming soon"; $("soon").hidden = false;
+    $("go-t").textContent = "Nạp firmware · Coming soon";
+  } else if (testMode) {
+    badge.className = "badge test"; bt.textContent = "Bản thử";
+  } else {
+    badge.className = "badge ok"; bt.textContent = "Sẵn sàng";
+  }
+  const sizes = (f) => (manifest?.parts || []).filter(f).reduce((a, p) => a + p.size, 0);
+  if (usable) {
+    $("t-update").textContent = "≈ " + mb1(sizes((p) => p.update)) + ", dưới 1 phút";
+    $("t-full").textContent = "≈ " + mb1(sizes(() => true)) + ", 2–5 phút";
+  }
+  const serialOk = "serial" in navigator;
+  $("no-serial").hidden = serialOk;
+  $("go").disabled = !(usable && serialOk);
+  return usable;
+}
+
+// ---------- tải file, kiểm SHA-256
+async function sha256hex(buf) {
+  const d = await crypto.subtle.digest("SHA-256", buf);
+  return [...new Uint8Array(d)].map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+async function download(parts) {
+  const total = parts.reduce((a, p) => a + p.size, 0);
+  let got = 0;
+  const t0 = performance.now();
+  const out = [];
+  for (const p of parts) {
+    const url = new URL(p.file, manifestBase);
+    const r = await fetch(url, { cache: "no-store" });
+    if (!r.ok) throw new FlashError("download", `Không tải được ${p.file} (HTTP ${r.status}).`);
+    const reader = r.body.getReader();
+    const chunks = [];
+    let n = 0;
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      chunks.push(value); n += value.length; got += value.length;
+      progress("download", got / total);
+      setDetail("download", `${mb1(got)} / ${mb1(total)}`);
+    }
+    const data = new Uint8Array(n);
+    let o = 0;
+    for (const c of chunks) { data.set(c, o); o += c.length; }
+    if (n !== p.size) throw new FlashError("download", `${p.file} có ${n} byte, manifest ghi ${p.size}.`);
+    const h = await sha256hex(data);
+    if (h !== p.sha256) throw new FlashError("download", `${p.file} không khớp SHA-256 (file hỏng hoặc bị thay).`);
+    log(`Tải ${p.file}: ${n} byte, SHA-256 khớp`);
+    out.push({ data, address: parseInt(p.address, 16), file: p.file, size: n });
+  }
+  speedLine(rate(got, performance.now() - t0));
+  return out;
+}
+
+class FlashError extends Error { constructor(step, msg, hints) { super(msg); this.step = step; this.hints = hints || []; } }
+
+const HINTS = {
+  port: ["Đổi cáp có truyền dữ liệu, cắm thẳng vào máy.", "Giữ BOOT, bấm RESET, thả BOOT rồi thử lại."],
+  busy: ["Đóng chương trình khác đang mở cổng (Arduino, esptool, tab nạp khác) rồi thử lại."],
+  sync: ["Giữ nút BOOT, bấm RESET, thả BOOT rồi bấm Thử lại.", "Thử cổng USB khác trên máy."],
+  write: ["Không sao: mạch vẫn nạp lại được. Cắm lại cáp rồi bấm Thử lại.", "Nếu loa không lên được nữa, chọn Cài lần đầu."],
+};
+
+// ---------- tiến trình chính
+let loader = null, transport = null;
+async function closePort() {
+  try { if (transport) await transport.disconnect(); } catch (e) { /* đã đóng */ }
+  transport = null; loader = null;
+}
+function saveBackup(data, mac) {
+  const d = new Date();
+  const stamp = d.getFullYear() + String(d.getMonth() + 1).padStart(2, "0") + String(d.getDate()).padStart(2, "0") + "-" + String(d.getHours()).padStart(2, "0") + String(d.getMinutes()).padStart(2, "0");
+  const name = `sao-luu-${(mac || "mach").replace(/:/g, "")}-${stamp}.bin`;
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([data], { type: "application/octet-stream" }));
+  a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 60000);
+  return name;
+}
+
+async function flash() {
+  const mode = document.querySelector("input[name=mode]:checked").value;
+  const backup = mode === "full" && $("backup").checked;
+  resetSteps(mode, backup);
+  running = true;
+  $("go").disabled = true;
+  document.querySelectorAll("input[name=mode], #backup").forEach((el) => el.disabled = true);
+  let wake = null;
+  try { wake = await navigator.wakeLock?.request("screen"); } catch (e) { /* không có cũng được */ }
+  let current = "connect";
+  try {
+    // 1. cổng
+    setStep("connect", "active");
+    let port;
+    try {
+      port = await navigator.serial.requestPort();
+    } catch (e) {
+      if (e.name === "NotFoundError") { log("Chưa chọn cổng."); resetSteps(mode, backup); return; }
+      throw new FlashError("connect", "Không mở được hộp chọn cổng: " + e.message, HINTS.port);
+    }
+    transport = new Transport(port, false);
+    loader = new ESPLoader({ transport, baudrate: BAUD, terminal, debugLogging: false });
+    log("Đang kết nối với mạch…");
+    let desc;
+    try {
+      desc = await loader.main();
+    } catch (e) {
+      const m = String(e && e.message || e);
+      if (/open|busy|InvalidState|NetworkError|access/i.test(m)) throw new FlashError("connect", "Cổng đang bận hoặc không mở được: " + m, HINTS.busy);
+      throw new FlashError("connect", "Mạch không vào chế độ nạp: " + m, HINTS.sync);
+    }
+    setStep("connect", "done", "Đã kết nối");
+
+    // 2. đúng mạch
+    current = "chip";
+    setStep("chip", "active");
+    const chipName = loader.chip.CHIP_NAME;
+    const mac = await loader.chip.readMac(loader).catch(() => "");
+    const flashSize = await loader.detectFlashSize().catch(() => undefined);
+    const dev = $("device");
+    dev.innerHTML = `<span>Chip <b>${desc}</b></span><span>Flash <b>${flashSize || "?"}</b></span>` + (mac ? `<span>MAC <b>${mac}</b></span>` : "");
+    dev.hidden = false;
+    log(`Mạch: ${desc}, flash ${flashSize}, MAC ${mac}`);
+    if (chipName !== (manifest.chip || "ESP32-S3")) throw new FlashError("chip", `Đây là ${chipName}, không phải ${manifest.chip}. Loa Ting dùng mạch LCDWIKI ES3C28P (ESP32-S3).`, ["Kiểm tra lại mạch đang cắm."]);
+    if (flashSize && manifest.flash_size && flashSize !== manifest.flash_size) throw new FlashError("chip", `Flash ${flashSize}, cần ${manifest.flash_size} (mạch N16R8).`, ["Loa Ting cần bản mạch có flash 16 MB."]);
+    setStep("chip", "done", `${chipName} · ${flashSize || "?"}`);
+
+    // 3. sao lưu
+    if (backup) {
+      current = "backup";
+      setStep("backup", "active");
+      const size = 16 * 1048576;
+      const t0 = performance.now();
+      const data = await loader.readFlash(0, size, (packet, got, total) => {
+        progress("backup", got / total);
+        setDetail("backup", `${mb1(got)} / ${mb1(total)}`);
+        const ms = performance.now() - t0;
+        speedLine([rate(got, ms), eta(total - got, got, ms)].filter(Boolean).join(" · "));
+      });
+      const name = saveBackup(data, mac);
+      setStep("backup", "done", "Đã tải " + name);
+      log("Đã lưu bản sao lưu: " + name);
+    }
+
+    // 4. tải firmware
+    current = "download";
+    setStep("download", "active");
+    const parts = manifest.parts.filter((p) => mode === "full" || p.update);
+    const files = await download(parts);
+    setStep("download", "done", `${files.length} file · ${mb1(files.reduce((a, f) => a + f.size, 0))}`);
+
+    // 5–7. xoá (cài lần đầu), ghi, đối chiếu MD5
+    current = mode === "full" ? "erase" : "write";
+    if (mode === "full") setStep("erase", "active", "≈ 20–40 giây");
+    else setStep("write", "active");
+    const totalBytes = files.reduce((a, f) => a + f.size, 0);
+    const before = files.map((f, i) => files.slice(0, i).reduce((a, g) => a + g.size, 0));
+    let verified = 0, wStart = 0, lastIndex = -1;
+    onTerminal = (s) => {
+      if (s.includes("Hash of data verified")) {
+        verified++;
+        setDetail("verify", `${verified}/${files.length} file khớp`);
+        if (verified === files.length) setStep("verify", "done");
+      }
+    };
+    setStep("verify", "wait", `0/${files.length} file`);
+    await loader.writeFlash({
+      fileArray: files.map((f) => ({ data: f.data, address: f.address })),
+      flashSize: "keep", flashMode: "keep", flashFreq: "keep",
+      eraseAll: mode === "full", compress: true,
+      reportProgress: (i, sent, total) => {
+        if (current === "erase") { setStep("erase", "done", "Đã xoá"); current = "write"; setStep("write", "active"); }
+        if (!wStart) wStart = performance.now();
+        if (i !== lastIndex) { lastIndex = i; if (i > 0 && verified < i) setStep("verify", "active"); }
+        const frac = total ? sent / total : 0;
+        const doneBytes = before[i] + files[i].size * frac;
+        progress("write", doneBytes / totalBytes);
+        setDetail("write", `${files[i].file} · ${Math.floor(frac * 100)}%`);
+        $("now").textContent = `Đang ghi ${files[i].file} (${i + 1}/${files.length})`;
+        const ms = performance.now() - wStart;
+        speedLine([`${mb1(doneBytes)} / ${mb1(totalBytes)}`, rate(doneBytes, ms), eta(totalBytes - doneBytes, doneBytes, ms)].filter(Boolean).join(" · "));
+      },
+      calculateMD5Hash: (image) => SparkMD5.ArrayBuffer.hash(image.buffer.slice(image.byteOffset, image.byteOffset + image.byteLength)),
+    });
+    onTerminal = null;
+    setStep("write", "done", `${files.length} file · ${mb1(totalBytes)}`);
+    if (verified === files.length) setStep("verify", "done", `${verified}/${files.length} file khớp`);
+    else throw new FlashError("verify", "Không thấy xác nhận MD5 cho mọi file.", HINTS.write);
+
+    // 8. khởi động lại
+    current = "reset";
+    setStep("reset", "active");
+    await loader.after("hard_reset");
+    setStep("reset", "done", "Loa đang khởi động");
+    await closePort();
+    $("bar").classList.add("done");
+    $("now").textContent = "Xong";
+    speedLine("");
+    $("ok-t").textContent = mode === "full" ? "Cài xong Loa Ting " + manifest.version : "Đã cập nhật lên Loa Ting " + manifest.version;
+    $("ok").hidden = false;
+    log("Xong.");
+  } catch (e) {
+    onTerminal = null;
+    const step = e.step || current;
+    console.error(e);
+    log("LỖI: " + (e.message || e));
+    setStep(step, "error");
+    $("bar").classList.add("err");
+    $("now").textContent = "Dừng ở bước: " + stepEl(step).querySelector(".lbl").textContent;
+    $("bad-msg").textContent = e.message || String(e);
+    const hints = e.hints && e.hints.length ? e.hints : (step === "write" || step === "erase" || step === "verify") ? HINTS.write : HINTS.sync;
+    $("bad-hints").innerHTML = hints.map((h) => `<li>${h}</li>`).join("");
+    $("bad").hidden = false;
+    $("logbox").open = true;
+    await closePort();
+  } finally {
+    running = false;
+    if (wake) wake.release().catch(() => {});
+    document.querySelectorAll("input[name=mode], #backup").forEach((el) => el.disabled = false);
+    $("go").disabled = !(manifest && manifest.available && "serial" in navigator);
+  }
+}
+
+document.querySelectorAll("input[name=mode]").forEach((r) => r.addEventListener("change", () => {
+  $("backup-row").hidden = document.querySelector("input[name=mode]:checked").value !== "full";
+}));
+$("go").addEventListener("click", () => { if (!running) flash(); });
+$("retry").addEventListener("click", () => { if (!running) flash(); });
+$("again").addEventListener("click", () => { resetSteps(document.querySelector("input[name=mode]:checked").value, $("backup").checked); });
+window.addEventListener("beforeunload", (e) => { if (running) { e.preventDefault(); e.returnValue = ""; } });
+
+resetSteps("update", false);
+loadManifest();
+</script>
+</body>
+</html>

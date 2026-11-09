@@ -58,6 +58,8 @@ Video review gần 5 phút: vỏ in 3D, rồi từng ứng dụng trên loa. Xem
 
 📐 **[Trang Vỏ in 3D](https://esp32.viennv.dev/vo/)**: so sánh 3 kiểu vỏ, thông số, cấu tạo, lý do thiết kế và mô hình 3D của từng vỏ.
 
+🔌 **[Nạp firmware](https://esp32.viennv.dev/nap/)**: nạp ngay trên Chrome/Edge qua cáp USB, có từng bước và phần trăm (mở khi phát hành).
+
 📘 **[Tài liệu](https://esp32.viennv.dev/tai-lieu/)**: tự cài máy chủ nhạc và khung ảnh Google Photos, hoặc nối loa với nguồn báo biến động số dư (qua LAN hay máy chủ riêng, kèm máy chủ mẫu Python).
 
 🧊 **[Xoay thử mô hình 3D](https://esp32.viennv.dev/3d/)** ngay trên trình duyệt: tách lớp, cắt dọc, giấu từng chi tiết.
