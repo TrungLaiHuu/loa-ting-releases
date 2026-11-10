@@ -69,11 +69,11 @@ Video review gần 5 phút: vỏ in 3D, rồi từng ứng dụng trên loa. Xem
 ### 🚗 Vỏ HUD cho ô tô
 
 <p align="center">
-  <img src="assets/hud-nem.jpg" width="48%" alt="Vỏ HUD dáng nêm 20° màu đen" />
+  <img src="assets/hud-nem.jpg" width="48%" alt="Vỏ HUD nghiêng 20° màu đen" />
   <img src="assets/hud-phang.jpg" width="48%" alt="Vỏ HUD thân phẳng trên đế chỉnh góc" />
 </p>
 
-- **[Nêm 20°](https://esp32.viennv.dev/3d/hud-nem/):** 127 × 69 × 35 mm, 3 chi tiết, khoảng 47 g; hợp kính lái 30–35°.
+- **[Nghiêng 20°](https://esp32.viennv.dev/3d/hud-nem/):** 127 × 69 × 35 mm, 3 chi tiết, khoảng 47 g; hợp kính lái 30–35°.
 - **[Thân phẳng trên đế 5 nấc](https://esp32.viennv.dev/3d/hud-phang/):** thân 127 × 63 × 20 mm, chỉnh 10–40° cho mọi góc kính; 6 chi tiết, bản lề in liền, không chốt, không vít, khoảng 130 g.
 - Cả hai: màu đen, loa của bộ mạch nằm cạnh màn để đọc cảnh báo, cổng USB-C bên trái hoặc phải có viền in rời, không pin (cắm nguồn xe), miếng thép trong đáy để hít giá nam châm. Nên in PETG hoặc ASA.
 - Đã có file in (STL, 3MF) nhưng chưa in thử; file sẽ có trong bản phát hành.
