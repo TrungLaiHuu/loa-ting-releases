@@ -100,4 +100,10 @@
       <image:loc>https://esp32.viennv.dev/assets/screens/all/41_hud_turn_lanes.png</image:loc>
     </image:image>
   </url>
+  <url>
+    <loc>https://esp32.viennv.dev/dat-in/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
 </urlset>
