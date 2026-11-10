@@ -959,6 +959,7 @@ function renderInfo() {
     ['Lắp ráp', `đế cài 4 ngàm (2 trước, 2 sau), khe nạy ở hông ${ss}; mạch bắt 4 vít M3×6`],
     ['Nguồn', `USB-C ở hông ${us}; viền cổng sạc in rời (màu vàng) ôm sát cổng, lòng ${G.trim.well.w} × ${G.trim.well.h} mm cho vỏ nhựa đầu dây; đầu dây dừng cách miệng cổng ${nf(G.trim.stop, 2)} mm (trước là ${nf(G.trim.was, 1)} mm)`],
     ['Nhựa', `nắp ${nf(S.cover)} cm³, đế ${nf(S.base)} cm³; PETG hoặc ASA chịu nắng tốt hơn PLA`],
+    ['Đầu in', 'nên dùng 0,4: lỗ mic Ø1,5, nẫy ngàm 0,8 mm, viền cổng sạc vách 1 mm; đầu 0,6 thì in mẫu thử ngàm trước'],
     ['Bỏ ra', 'pin 18650: nắng trên taplo làm pin phồng, dễ cháy'],
   ];
   $('specs').innerHTML = rows.filter(Boolean).map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('');
