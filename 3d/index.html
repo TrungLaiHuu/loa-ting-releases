@@ -8,7 +8,7 @@
 <link rel="canonical" href="https://esp32.viennv.dev/3d/">
 <meta property="og:title" content="Mô hình 3D vỏ Loa Ting">
 <meta property="og:description" content="Xoay, tách lớp, cắt dọc vỏ in 3D của Loa Ting ngay trên trình duyệt.">
-<meta property="og:image" content="https://esp32.viennv.dev/assets/og-image.jpg?v=3">
+<meta property="og:image" content="https://esp32.viennv.dev/assets/og-image.jpg?v=4">
 <meta property="og:url" content="https://esp32.viennv.dev/3d/">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 </head>
@@ -96,6 +96,11 @@ body { background: var(--bg); color: var(--ink); font: 14px/1.45 var(--font-ui);
 .files { font-size: 13px; color: var(--muted); }
 .files code { font-family: var(--font-mono); font-size: 12px; color: var(--ink); word-break: break-all; }
 .files ul { margin: 6px 0 0; padding-left: 18px; display: grid; gap: 2px; }
+dl.specs { margin: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 12px; font-size: 13px; }
+dl.specs dt { color: var(--muted); }
+dl.specs dd { margin: 0; }
+.notes { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 13px; }
+.notes li::marker { color: var(--muted); }
 @media (max-width: 760px) {
   html, body { height: auto; }
   .app { display: block; height: auto; }
@@ -107,8 +112,8 @@ body { background: var(--bg); color: var(--ink); font: 14px/1.45 var(--font-ui);
 <div class="app">
   <header class="bar">
     <a href="../vo/#de-ban" style="font-weight:600;font-size:14px;color:var(--muted);text-decoration:none;margin-right:4px">← Vỏ in 3D</a>
-    <h1>Vỏ để bàn loa ES3C28P<span class="ver">bản 3.1 · 09/11/2026 · xem trước: vỏ hẹp lại 98,8 mm, lòng viền cổng sạc sâu 2,2 mm (trước 4,8), đầu dây dừng cách miệng cổng 0,45 mm · file in: Coming soon</span></h1>
-    <div class="spec">98,8 × 52 × 92,1 mm · mặt nghiêng 20° · 5 chi tiết in · ~91 g nhựa</div>
+    <h1>Vỏ để bàn loa ES3C28P<span class="ver">bản 3.1 · 09/11/2026 · vỏ hẹp 98,8 mm, viền cổng sạc in rời: đầu dây dừng cách miệng cổng 0,45 mm, lòng viền sâu 2,2 mm · file in: Coming soon</span></h1>
+    <div class="spec">98,8 × 52 × 92,1 mm · mặt nghiêng 20° · 5 chi tiết in · ~92 g nhựa</div>
   </header>
   <main class="stage">
     <canvas id="c" aria-label="Mô hình 3D của vỏ loa"></canvas>
@@ -140,6 +145,33 @@ body { background: var(--bg); color: var(--ink); font: 14px/1.45 var(--font-ui);
       <h2>Chi tiết trong mô hình</h2>
       <p class="help">Bỏ dấu tick để giấu chi tiết đó khỏi khung 3D và nhìn thấy phía sau nó. Chỉ đổi cách xem, thiết kế giữ nguyên. Bấm "Tìm" để tô cam một chi tiết và làm mờ phần còn lại, kể cả chi tiết nằm sâu trong vỏ như loa và khuôn dán loa.</p>
       <div class="parts" id="parts"></div>
+    </section>
+    <section>
+      <h2>Thông số</h2>
+      <dl class="specs">
+        <dt>Kích thước</dt><dd>98,8 × 52 × 92,1 mm (ngang × sâu × cao)</dd>
+        <dt>Mặt trước</dt><dd>ngả 20° để ngồi bàn là nhìn thẳng màn; ô hở 58,7 × 44,2 mm cắt đúng vùng hiển thị, vát 45°</dd>
+        <dt>Loa</dt><dd>loa của kit 40 × 28 × 10 mm, lưng và đáy dán băng keo 3M vào khuôn in liền thân; màng loa cách lưới 5 mm, không chạm gì; lưới 140 lỗ Ø2</dd>
+        <dt>Pin</dt><dd>18650 trong khay in liền thân (lòng 76 mm), dán keo nến; công tắc KCD11 sau lưng</dd>
+        <dt>Sạc</dt><dd>USB-C ở hông trái; viền cổng in rời ôm sát cổng, đầu dây dừng cách miệng cổng 0,45 mm, lòng 14 × 8 mm cho vỏ nhựa đầu dây</dd>
+        <dt>Nút</dt><dd>RESET / BOOT bấm qua 2 chốt ở mặt sau; đầu chốt cách nút 2,0 mm nên tì mạnh vào màn không lỡ reset</dd>
+        <dt>Mic</dt><dd>lỗ Ø1,5 ở mép phải mặt trước, ống dẫn tiếng xuống tận mic</dd>
+        <dt>Đóng vỏ</dt><dd>4 nẫy móc, gờ đỡ mặt trước, khe nạy ở giữa mép dưới; 2 vít M3×10 ở đáy khi muốn khóa hẳn</dd>
+        <dt>Tản nhiệt</dt><dd>khí vào qua lưới loa, ra 7 khe sau lưng (nan 3 mm)</dd>
+        <dt>Nhựa</dt><dd>thân 57,2 cm³ màu xanh than, mặt trước 16,0 cm³ và chi tiết nhỏ 0,6 cm³ màu vàng; ≈92 g PETG hoặc PLA</dd>
+        <dt>In</dt><dd>bàn từ 220 × 220 mm, không cần support, đầu in 0,4 đến 0,6; máy nhiều màu in cả bộ một lần</dd>
+      </dl>
+    </section>
+    <section>
+      <h2>Dùng để bàn</h2>
+      <ul class="notes">
+        <li>Đặt một góc bàn làm việc: màn hình ngay tầm mắt, loa phát ra từ lưới dưới màn.</li>
+        <li>Gọi "Hey Ivy" để hỏi trợ lý AI tiếng Việt, mở nhạc theo yêu cầu hoặc đài VOV. Màn hình chính là đồng hồ, lịch âm và thời tiết; menu có khung ảnh, giá vàng, báo thức, Pomodoro.</li>
+        <li>Báo biến động số dư: tiền vào là "ting" rồi loa đọc to số tiền; mã VietQR hiện trên màn để khách quét.</li>
+        <li>Có pin 18650 bên trong nên rút dây vẫn chạy. Sạc qua cổng USB-C ở hông, đầu dây vỏ to cũng cắm hết.</li>
+        <li>Nạp lại firmware không cần mở vỏ: bấm 2 chốt RESET / BOOT ở mặt sau, hoặc nạp trên trình duyệt ở esp32.viennv.dev/nap/.</li>
+        <li>Mở vỏ: rút viền cổng sạc ra trước, rồi nạy mặt trước ở khe giữa mép dưới.</li>
+      </ul>
     </section>
     <section class="files">
       <h2>File để in</h2>
