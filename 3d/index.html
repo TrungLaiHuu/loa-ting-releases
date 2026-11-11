@@ -309,12 +309,17 @@ function go(view) {
   tween = { from, to, t0: performance.now() };
 }
 camera.position.set(...VIEWS.hero[0]); controls.target.set(...VIEWS.hero[1]); controls.update();
+let insideHid = false;
+document.addEventListener('change', e => { if (e.target.id === 'show-shell' && e.isTrusted) insideHid = false; });   // the list is built below
 document.getElementById('views').addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b) return;
   for (const x of e.currentTarget.querySelectorAll('button')) x.setAttribute('aria-pressed', String(x === b));
-  // "inside": hide the shell so the speaker in its mould, the board and the battery show
+  // "inside": hide the shell so the speaker in its mould, the board and the battery show; the next view shows it
+  // again, unless the viewer ticked it themselves meanwhile (insideHid is cleared by a manual change)
   const shellBox = document.getElementById('show-shell');
-  if (b.dataset.view === 'inside' && shellBox.checked) { shellBox.checked = false; shellBox.dispatchEvent(new Event('change')); }
+  const setShell = on => { shellBox.checked = on; shellBox.dispatchEvent(new Event('change')); };
+  if (b.dataset.view === 'inside') { if (shellBox.checked) { setShell(false); insideHid = true; } }
+  else if (insideHid && !shellBox.checked) { setShell(true); insideHid = false; }
   go(b.dataset.view);
 });
 
