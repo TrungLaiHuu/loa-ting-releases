@@ -58,11 +58,11 @@ Video review gần 5 phút: vỏ in 3D, rồi từng ứng dụng trên loa. Xem
 - **Vỏ để bàn:** 98,8 × 52 × 92 mm, mặt trước ngả 20°; pin 18650 dưới đáy, công tắc nguồn; mặt trước cài 4 nẫy móc, tì lên gờ đỡ 4 cạnh, không cần vít; loa dán băng keo 3M vào khuôn trong thân, cách lưới 5 mm; 7 khe thoát nhiệt sau lưng; viền cổng sạc in rời ôm sát cổng USB-C.
 - **In 3D:** 5 chi tiết, khoảng 92 g nhựa, lưng xanh than hoặc đen, mặt trước vàng. File 3MF xếp sẵn bàn in 220 × 220.
 
-📐 **[Trang Vỏ in 3D](https://esp32.viennv.dev/vo/)**: so sánh 3 kiểu vỏ, thông số, cấu tạo, lý do thiết kế và mô hình 3D của từng vỏ.
+📐 **[Trang Vỏ in 3D](https://esp32.viennv.dev/case/)**: so sánh 3 kiểu vỏ, thông số, cấu tạo, lý do thiết kế và mô hình 3D của từng vỏ.
 
-🔌 **[Nạp firmware](https://esp32.viennv.dev/nap/)**: nạp ngay trên Chrome/Edge qua cáp USB, có từng bước và phần trăm (mở khi phát hành).
+🔌 **[Nạp firmware](https://esp32.viennv.dev/flash/)**: nạp ngay trên Chrome/Edge qua cáp USB, có từng bước và phần trăm (mở khi phát hành).
 
-📘 **[Tài liệu](https://esp32.viennv.dev/tai-lieu/)**: tự cài máy chủ nhạc và khung ảnh Google Photos, hoặc nối loa với nguồn báo biến động số dư (qua LAN hay máy chủ riêng, kèm máy chủ mẫu Python).
+📘 **[Tài liệu](https://esp32.viennv.dev/docs/)**: tự cài máy chủ nhạc và khung ảnh Google Photos, hoặc nối loa với nguồn báo biến động số dư (qua LAN hay máy chủ riêng, kèm máy chủ mẫu Python).
 
 🧊 **[Xoay thử mô hình 3D](https://esp32.viennv.dev/3d/)** ngay trên trình duyệt: tách lớp, cắt dọc, giấu từng chi tiết.
 
@@ -73,8 +73,8 @@ Video review gần 5 phút: vỏ in 3D, rồi từng ứng dụng trên loa. Xem
   <img src="assets/hud-phang.jpg" width="48%" alt="Vỏ HUD thân phẳng trên đế chỉnh góc" />
 </p>
 
-- **[Nghiêng 20°](https://esp32.viennv.dev/3d/hud-nem/):** 127 × 69 × 35 mm, 3 chi tiết, khoảng 47 g; hợp kính lái 30–35°.
-- **[Thân phẳng trên đế 5 nấc](https://esp32.viennv.dev/3d/hud-phang/):** thân 127 × 63 × 20 mm, chỉnh 10–40° cho mọi góc kính; 6 chi tiết, bản lề in liền, không chốt, không vít, khoảng 130 g.
+- **[Nghiêng 20°](https://esp32.viennv.dev/3d/hud-tilted/):** 127 × 69 × 35 mm, 3 chi tiết, khoảng 47 g; hợp kính lái 30–35°.
+- **[Thân phẳng trên đế 5 nấc](https://esp32.viennv.dev/3d/hud-flat/):** thân 127 × 63 × 20 mm, chỉnh 10–40° cho mọi góc kính; 6 chi tiết, bản lề in liền, không chốt, không vít, khoảng 130 g.
 - Cả hai: màu đen, loa của bộ mạch nằm cạnh màn để đọc cảnh báo, cổng USB-C bên trái hoặc phải có viền in rời, không pin (cắm nguồn xe), miếng thép trong đáy để hít giá nam châm. Nên in PETG hoặc ASA.
 - Đã có file in (STL, 3MF); file sẽ có trong bản phát hành.
 
@@ -85,7 +85,7 @@ Video review gần 5 phút: vỏ in 3D, rồi từng ứng dụng trên loa. Xem
 ## 🛠️ Tự làm một chiếc
 
 1. **In vỏ, chuẩn bị:** in 5 chi tiết từ file 3MF. Cần thêm mạch ES3C28P (kèm loa), một pin 18650 và một công tắc nhỏ.
-2. **Nạp firmware:** cắm mạch vào máy tính bằng USB-C rồi nạp ngay trên trình duyệt ở trang [Nạp firmware](https://esp32.viennv.dev/nap/), hoặc nhấp đúp `nap-firmware.command` (macOS). Cập nhật về sau vẫn giữ Wi-Fi và cài đặt.
+2. **Nạp firmware:** cắm mạch vào máy tính bằng USB-C rồi nạp ngay trên trình duyệt ở trang [Nạp firmware](https://esp32.viennv.dev/flash/), hoặc nhấp đúp `nap-firmware.command` (macOS). Cập nhật về sau vẫn giữ Wi-Fi và cài đặt.
 3. **Cài bằng điện thoại:** vào Wi-Fi “Xiaozhi-xxxx” của loa để chọn mạng nhà, rồi quét mã trên loa để mở trang cài đặt.
 
 ## 💬 Nhóm Zalo
